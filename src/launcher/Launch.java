@@ -4,7 +4,7 @@ import javax.swing.UIManager;
 
 import mdlaf.MaterialLookAndFeel;
 import mdlaf.themes.JMarsDarkTheme;
-import window.MainFrame;
+import window.frame.MainFrame;
 
 public class Launch {
 	public static void main(String args[]) {

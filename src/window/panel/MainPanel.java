@@ -1,4 +1,4 @@
-package window;
+package window.panel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import config.Config;
+import window.frame.ConfigFrame;
+import window.frame.MainFrame;
 
 public class MainPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
@@ -35,7 +37,7 @@ public class MainPanel extends JPanel{
 	private void setup_ui_components() {
 		config_button = new JButton("configure..");
 		config_button.setSize(80,25);
-		config_button.setLocation(this.getWidth()-config_button.getWidth()-20,20);
+		config_button.setLocation(20,20);
 		config_button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
