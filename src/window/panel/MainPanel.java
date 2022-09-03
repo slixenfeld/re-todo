@@ -4,11 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -113,7 +109,7 @@ public class MainPanel extends JPanel{
 	 * 
 	 * @param key
 	 * @param name
-	 * @return days until expiration. (if the task is more than 5 years in the future returns 999999999)
+	 * @return days until expiration. (if the TODO is more than 5 years in the future returns - 999999999)
 	 */
 	private int getExpiredTime(String key, String name) {
 		String date_string = (String) Config.properties.get(name+"_last_date");
@@ -133,7 +129,7 @@ public class MainPanel extends JPanel{
 		} else if (date_after_days.getYear() == LocalDate.now().getYear()+5) {
 			return (365 * 4) + (date_after_days.getDayOfYear() + (365 - LocalDate.now().getDayOfYear()));
 		} 
-		return 999999999;
+		return -999999999;
 	}
 	
 	@Override
