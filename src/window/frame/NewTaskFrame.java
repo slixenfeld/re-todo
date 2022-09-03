@@ -1,6 +1,9 @@
-package window;
+package window.frame;
 
 import javax.swing.JFrame;
+
+import window.panel.ConfigPanel;
+import window.panel.NewTaskPanel;
 
 public class NewTaskFrame extends JFrame{
 	private static final long serialVersionUID = 1L;

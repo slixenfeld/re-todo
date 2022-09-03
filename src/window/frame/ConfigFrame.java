@@ -1,6 +1,8 @@
-package window;
+package window.frame;
 
 import javax.swing.JFrame;
+
+import window.panel.ConfigPanel;
 
 public class ConfigFrame extends JFrame{
 	private static final long serialVersionUID = 1L;

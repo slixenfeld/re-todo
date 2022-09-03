@@ -1,4 +1,4 @@
-package window;
+package window.panel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +11,8 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
 import config.Config;
+import window.frame.ConfigFrame;
+import window.frame.NewTaskFrame;
 
 public class NewTaskPanel extends JPanel {
 	private static final long serialVersionUID = 1L;

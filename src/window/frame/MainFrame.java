@@ -1,8 +1,10 @@
-package window;
+package window.frame;
 
 import java.awt.Color;
 
 import javax.swing.JFrame;
+
+import window.panel.MainPanel;
 
 public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
