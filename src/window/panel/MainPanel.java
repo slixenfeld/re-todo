@@ -81,20 +81,16 @@ public class MainPanel extends JPanel{
 			task_button.setSize(300,25);
 			task_button.setLocation(x, y);
 			task_button.setEnabled(false);
-			System.out.println(days_to_expiration);
 			if (days_to_expiration <= 0) {
 				task_button.setEnabled(true);
 				if (days_to_expiration < 0) {
 					task_button.setText(task_button.getText() + " ("+days_to_expiration+")");
 				}
-			}
-			else {
 
 				task_button.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						Config.properties.put(name+"_last_date", LocalDate.now().toString());
-						System.out.println("date set");
 						Config.save();
 						
 						parent_obj.dispose();
