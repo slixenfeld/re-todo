@@ -81,12 +81,9 @@ public class MainPanel extends JPanel{
 			task_button.setSize(300,25);
 			task_button.setLocation(x, y);
 			task_button.setEnabled(false);
+			task_button.setText(task_button.getText() + " ("+days_to_expiration+")");
 			if (days_to_expiration <= 0) {
 				task_button.setEnabled(true);
-				if (days_to_expiration < 0) {
-					task_button.setText(task_button.getText() + " ("+days_to_expiration+")");
-				}
-
 				task_button.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
