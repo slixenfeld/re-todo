@@ -1,6 +1,7 @@
 package window.frame;
 
 import java.awt.Color;
+import java.awt.Point;
 
 import javax.swing.JFrame;
 
@@ -12,6 +13,14 @@ public class MainFrame extends JFrame {
 	public MainFrame() {
 		setup_frame_settings();
 		this.setType(Type.UTILITY);
+		this.add(new MainPanel(this));
+		this.setVisible(true);
+	}
+
+	public MainFrame(Point location) {
+		setup_frame_settings();
+		this.setType(Type.UTILITY);
+		this.setLocation(location);
 		this.add(new MainPanel(this));
 		this.setVisible(true);
 	}
