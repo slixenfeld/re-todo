@@ -75,14 +75,21 @@ public class MainPanel extends JPanel{
 	
 		if (!name.isEmpty()) {
 					
-			boolean button_disabled = checkTodoExpired(key, name);
+			int days_to_expiration = getExpiredTime(key, name);
 			
 			JButton task_button = new JButton(name);
 			task_button.setSize(300,25);
 			task_button.setLocation(x, y);
-			if (button_disabled)
-				task_button.setEnabled(false);
+			task_button.setEnabled(false);
+			System.out.println(days_to_expiration);
+			if (days_to_expiration <= 0) {
+				task_button.setEnabled(true);
+				if (days_to_expiration < 0) {
+					task_button.setText(task_button.getText() + " ("+days_to_expiration+")");
+				}
+			}
 			else {
+
 				task_button.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -103,14 +110,11 @@ public class MainPanel extends JPanel{
 		}
 	}
 
-	private boolean checkTodoExpired(String key, String name) {
+	private int getExpiredTime(String key, String name) {
 		String date_string = (String) Config.properties.get(name+"_last_date");
 		LocalDate date_after_days = LocalDate.parse(date_string)
 				.plusDays(Integer.parseInt((String)Config.properties.get(key)));
-		if (date_after_days.compareTo(LocalDate.now()) > 0) {
-			return true;
-		}
-		return false;
+		return date_after_days.compareTo(LocalDate.now());
 	}
 	
 	@Override
