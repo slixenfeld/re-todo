@@ -7,7 +7,6 @@ import java.util.Map.Entry;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import config.Config;
@@ -20,7 +19,10 @@ public class MainPanel extends JPanel{
 	int row_x = 25;
 	int row_y = 50;
 	
+	JFrame parent;
+	
 	public MainPanel(JFrame parent) {
+		this.parent = parent;
 		
 		Config.load();
 		
@@ -52,18 +54,40 @@ public class MainPanel extends JPanel{
 		String name = (key.contains("_days")) ? key.substring(0, key.length()-5 ) : "" ;
 	
 		if (!name.isEmpty()) {
+					
+			boolean button_disabled = checkTodoExpired(key, name);
+			
 			JButton task_button = new JButton(name);
 			task_button.setSize(300,25);
 			task_button.setLocation(x, y);
-			task_button.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					Config.properties.put(name+"_last_date", LocalDate.now().toString());
-				}
-			});
+			if (button_disabled)
+				task_button.setEnabled(false);
+			else {
+				task_button.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						Config.properties.put(name+"_last_date", LocalDate.now().toString());
+						System.out.println("date set");
+						Config.save();
+						
+						parent.dispose();
+						new MainFrame();
+					}
+				});
+			}
 			this.add(task_button);
 			
 			row_y += 25;
 		}
+	}
+
+	private boolean checkTodoExpired(String key, String name) {
+		String date_string = (String) Config.properties.get(name+"_last_date");
+		LocalDate date_after_days = LocalDate.parse(date_string)
+				.plusDays(Integer.parseInt((String)Config.properties.get(key)));
+		if (date_after_days.compareTo(LocalDate.now()) > 0) {
+			return true;
+		}
+		return false;
 	}
 }
