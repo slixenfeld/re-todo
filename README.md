@@ -1,3 +1,4 @@
 # re-todo
 
-Application for managing reaccuring tasks.
+Desktop Application for managing reaccuring tasks.
+
