@@ -69,7 +69,9 @@ public class NewTaskPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Config.properties.put(""+task_name_field.getText()+"_days", ""+task_repeat_days.getValue());
-				Config.properties.put(""+task_name_field.getText()+"_last_date", LocalDate.now().toString());
+				if (Config.properties.get(""+task_name_field.getText()+"_last_date") == null) {
+					Config.properties.put(""+task_name_field.getText()+"_last_date", LocalDate.now().toString());
+				}
 				Config.save();
 				
 				parent.getParent_obj()
