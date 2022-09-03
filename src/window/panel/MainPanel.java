@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -40,9 +41,9 @@ public class MainPanel extends JPanel{
 	}
 	
 	private void setup_ui_components() {
-		config_button = new JButton("configure..");
+		config_button = new JButton(new ImageIcon(this.getClass().getResource("/res/config.png")));
 		config_button.setFocusable(false);
-		config_button.setSize(80,25);
+		config_button.setSize(35,35);
 		config_button.setLocation(1,1);
 		config_button.addActionListener(new ActionListener() {
 			@Override
@@ -56,7 +57,7 @@ public class MainPanel extends JPanel{
 		close_button = new JButton("x");
 		close_button.setFocusable(false);
 		close_button.setSize(40,25);
-		close_button.setLocation(getWidth()-42, 1);
+		close_button.setLocation(getWidth()-41, 1);
 		close_button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
