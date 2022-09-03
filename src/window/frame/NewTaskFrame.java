@@ -23,7 +23,7 @@ public class NewTaskFrame extends JFrame{
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setLocationRelativeTo(parent_obj.getParent_obj());
 		this.setUndecorated(false);
-		this.setSize(0x171,0x100);
+		this.setSize(0x171,0x0A0);
 		this.setResizable(true);
 		this.setVisible(true);
 	}
