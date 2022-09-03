@@ -3,16 +3,17 @@ package window.panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
-import java.util.Map.Entry;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import config.Config;
+import lombok.Getter;
 import window.frame.ConfigFrame;
 import window.frame.MainFrame;
 
+@Getter
 public class MainPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	
@@ -21,11 +22,11 @@ public class MainPanel extends JPanel{
 	int row_x = 25;
 	int row_y = 50;
 	
-	public JFrame parent;
-	MainPanel this_obj = this;
+	public JFrame parent_obj;
+	public MainPanel this_obj = this;
 	
 	public MainPanel(JFrame parent) {
-		this.parent = parent;
+		this.parent_obj = parent;
 		
 		Config.load();
 		
@@ -48,9 +49,8 @@ public class MainPanel extends JPanel{
 		});
 		this.add(config_button);
 		
-		for( Entry<Object, Object> entry : Config.properties.entrySet() ) {
-			show_row( (String)entry.getKey(), (String)entry.getValue(), row_x, row_y);
-		}
+		Config.properties.entrySet().stream().forEach(
+			entry -> show_row( (String)entry.getKey(), (String)entry.getValue(), row_x, row_y));
 	}
 	
 	private void show_row(String key, String value, int x, int y) {
@@ -74,7 +74,7 @@ public class MainPanel extends JPanel{
 						System.out.println("date set");
 						Config.save();
 						
-						parent.dispose();
+						parent_obj.dispose();
 						new MainFrame();
 					}
 				});
@@ -83,7 +83,7 @@ public class MainPanel extends JPanel{
 			
 			row_y += 30;
 	
-			parent.setSize(this.getWidth(), 70 + row_y);
+			parent_obj.setSize(this.getWidth(), 70 + row_y);
 		}
 	}
 

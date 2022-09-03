@@ -5,16 +5,15 @@ import java.awt.event.ActionListener;
 import java.util.Map.Entry;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.sun.javafx.embed.swing.Disposer;
-
 import config.Config;
+import lombok.Getter;
 import window.frame.ConfigFrame;
 import window.frame.NewTaskFrame;
 
+@Getter
 public class ConfigPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
@@ -23,12 +22,12 @@ public class ConfigPanel extends JPanel {
 	int row_y = 70;
 		
 	public ConfigPanel this_obj = this;
-	public ConfigFrame parent;
+	public ConfigFrame parent_obj;
 	
 	public ConfigPanel(ConfigFrame parent) {
 		this.setSize(parent.getSize());
 		this.setLayout(null);
-		this.parent = parent;
+		this.parent_obj = parent;
 		
 		setup_ui_components();
 	}
@@ -86,15 +85,15 @@ public class ConfigPanel extends JPanel {
 					Config.properties.remove(key);
 					Config.properties.remove(name+"_last_date");
 					Config.save();
-					parent.dispose();
-					new ConfigFrame(parent.parent);
+					parent_obj.dispose();
+					new ConfigFrame(parent_obj.parent_obj);
 				}
 			});
 			this.add(del_button);
 			
 			row_y += 25;
 			
-			parent.setSize(this.getWidth(), 70 + row_y);
+			parent_obj.setSize(this.getWidth(), 70 + row_y);
 		}
 	}
 }

@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
@@ -61,9 +60,17 @@ public class NewTaskPanel extends JPanel {
 				Config.properties.put(""+task_name_field.getText()+"_days", ""+task_repeat_days.getValue());
 				Config.properties.put(""+task_name_field.getText()+"_last_date", LocalDate.now().toString());
 				Config.save();
-				parent.parent.parent.dispose();
+				
+				parent.getParent_obj()
+					.getParent_obj()
+					.dispose();
+				
 				parent.dispose();
-				new ConfigFrame(parent.parent.parent.parent);
+				
+				new ConfigFrame(parent
+						.getParent_obj()
+						.getParent_obj()
+						.getParent_obj());
 			}
 		});
 		this.add(save_button);
