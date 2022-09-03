@@ -26,19 +26,18 @@ public class ConfigPanel extends JPanel {
 	public ConfigFrame parent_obj;
 	
 	public ConfigPanel(ConfigFrame parent) {
+		this.parent_obj = parent;
 		this.setSize(parent.getSize());
 		this.setLayout(null);
-		this.parent_obj = parent;
+
 		
 		setup_ui_components();
 	}
 	
 	private void setup_ui_components() {
-
 		
-		for( Entry<Object, Object> entry : Config.properties.entrySet() ) {
-			addConfigRow( (String)entry.getKey(), (String)entry.getValue(), row_x, row_y);
-		}
+		Config.properties.entrySet().stream().forEach(
+				entry -> add_config_row( (String)entry.getKey(), (String)entry.getValue(), row_x, row_y));
 		
 		new_button = new JButton("add new todo...");
 		new_button.setSize(200,25);
@@ -52,7 +51,7 @@ public class ConfigPanel extends JPanel {
 		this.add(new_button);
 	}
 	
-	private void addConfigRow(String key, String value, int x, int y) {
+	private void add_config_row(String key, String value, int x, int y) {
 		
 		String name = (key.contains("_days")) ? key.substring(0, key.length()-5 ) : "" ;
 	
