@@ -2,6 +2,7 @@ package window.panel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.Map.Entry;
 
 import javax.swing.JButton;
@@ -19,7 +20,7 @@ public class ConfigPanel extends JPanel {
 
 	JButton new_button;
 	int row_x = 25;
-	int row_y = 70;
+	int row_y = 20;
 		
 	public ConfigPanel this_obj = this;
 	public ConfigFrame parent_obj;
@@ -33,9 +34,15 @@ public class ConfigPanel extends JPanel {
 	}
 	
 	private void setup_ui_components() {
-		new_button = new JButton("add...");
-		new_button.setSize(80,25);
-		new_button.setLocation(20,20);
+
+		
+		for( Entry<Object, Object> entry : Config.properties.entrySet() ) {
+			addConfigRow( (String)entry.getKey(), (String)entry.getValue(), row_x, row_y);
+		}
+		
+		new_button = new JButton("add new todo...");
+		new_button.setSize(200,25);
+		new_button.setLocation(getWidth()/2 - new_button.getWidth()/2 ,row_y +10);
 		new_button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -43,10 +50,6 @@ public class ConfigPanel extends JPanel {
 			}
 		});
 		this.add(new_button);
-		
-		for( Entry<Object, Object> entry : Config.properties.entrySet() ) {
-			addConfigRow( (String)entry.getKey(), (String)entry.getValue(), row_x, row_y);
-		}
 	}
 	
 	private void addConfigRow(String key, String value, int x, int y) {
@@ -91,9 +94,24 @@ public class ConfigPanel extends JPanel {
 			});
 			this.add(del_button);
 			
-			row_y += 25;
+			JButton reset_button = new JButton("reset");
+			reset_button.setSize(70,25);
+			reset_button.setLocation(getWidth()-250, row_y);
+			reset_button.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					Config.properties.put(""+name+"_last_date", LocalDate.now()
+							.minusDays(1 + Integer.parseInt((String)Config.properties.getProperty(key))).toString());
+					Config.save();
+					parent_obj.dispose();
+					new ConfigFrame(parent_obj.parent_obj);
+				}
+			});
+			this.add(reset_button);
 			
-			parent_obj.setSize(this.getWidth(), 70 + row_y);
+			row_y += 30;
+			
+			parent_obj.setSize(this.getWidth(), 70 + row_y +25);
 		}
 	}
 }

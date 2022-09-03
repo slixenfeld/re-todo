@@ -26,10 +26,10 @@ public class ConfigFrame  extends JFrame implements WindowListener{
 	}
 
 	private void setup_frame_settings() {
-		this.setTitle("configuration");
+		this.setTitle("re-todo configuration");
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setUndecorated(false);
-		this.setSize(0x201,0x200);
+		this.setSize(0x251,0x200);
 		this.setLocationRelativeTo(parent_obj);
 		this.setResizable(true);
 		this.setVisible(true);

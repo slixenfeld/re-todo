@@ -1,5 +1,7 @@
 package window.panel;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
@@ -18,6 +20,7 @@ public class MainPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	
 	JButton config_button;
+	JButton close_button;
 	
 	int row_x = 25;
 	int row_y = 50;
@@ -38,8 +41,9 @@ public class MainPanel extends JPanel{
 	
 	private void setup_ui_components() {
 		config_button = new JButton("configure..");
+		config_button.setFocusable(false);
 		config_button.setSize(80,25);
-		config_button.setLocation(20,20);
+		config_button.setLocation(1,1);
 		config_button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -48,6 +52,18 @@ public class MainPanel extends JPanel{
 			}
 		});
 		this.add(config_button);
+		
+		close_button = new JButton("x");
+		close_button.setFocusable(false);
+		close_button.setSize(40,25);
+		close_button.setLocation(getWidth()-42, 1);
+		close_button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		this.add(close_button);
 		
 		Config.properties.entrySet().stream().forEach(
 			entry -> show_row( (String)entry.getKey(), (String)entry.getValue(), row_x, row_y));
@@ -95,5 +111,16 @@ public class MainPanel extends JPanel{
 			return true;
 		}
 		return false;
+	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		g.setColor(new Color(21, 81, 89));
+		g.drawRect(0, 0, getWidth()-1, getHeight()-1);
+		g.setColor(new Color(41, 164, 181));
+		g.drawRect(0, 0, getWidth(), getHeight());
+		
 	}
 }
