@@ -5,9 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-import lombok.Data;
-
-@Data
 public class Config {
 	
 	public static Properties properties = new Properties();
@@ -18,8 +15,8 @@ public class Config {
 			properties.store(stream, null);
 			stream.flush();
 			stream.close();
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -28,8 +25,8 @@ public class Config {
 			FileInputStream stream = new FileInputStream(System.getenv("APPDATA") + "/retodo.conf");
 			properties.load(stream);
 			stream.close();
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }
