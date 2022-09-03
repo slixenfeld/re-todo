@@ -10,15 +10,14 @@ public class MainFrame extends JFrame {
 	public MainFrame() {
 		setup_frame_settings();
 		this.add(new MainPanel(this));
+		this.setVisible(true);
 	}
 	
-
 	private void setup_frame_settings() {
 		this.setBackground(Color.black);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setUndecorated(true);
 		this.setSize(0x171,0x200);
 		this.setResizable(true);
-		this.setVisible(true);
 	}
 }
