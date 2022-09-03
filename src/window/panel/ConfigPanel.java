@@ -20,10 +20,10 @@ public class ConfigPanel extends JPanel {
 
 	JButton new_button;
 	int row_x = 25;
-	int row_y = 50;
+	int row_y = 70;
 		
 	public ConfigPanel this_obj = this;
-	ConfigFrame parent;
+	public ConfigFrame parent;
 	
 	public ConfigPanel(ConfigFrame parent) {
 		this.setSize(parent.getSize());
@@ -34,9 +34,9 @@ public class ConfigPanel extends JPanel {
 	}
 	
 	private void setup_ui_components() {
-		new_button = new JButton("Add +");
+		new_button = new JButton("add...");
 		new_button.setSize(80,25);
-		new_button.setLocation(this.getWidth()-new_button.getWidth()-20,20);
+		new_button.setLocation(20,20);
 		new_button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -55,20 +55,20 @@ public class ConfigPanel extends JPanel {
 		String name = (key.contains("_days")) ? key.substring(0, key.length()-5 ) : "" ;
 	
 		if (!name.isEmpty()) {
-			JLabel task_name = new JLabel(name);
-			task_name.setSize(200,25);
-			task_name.setLocation(x, y);
-			this.add(task_name);
-			
-			
+
 			JLabel days = new JLabel( Config.properties.getProperty(key));
 			days.setSize(50,25);
-			days.setLocation(row_x + 50, row_y);
+			days.setLocation(row_x, row_y);
 			this.add(days);
 			
+			JLabel task_name = new JLabel(name);
+			task_name.setSize(200,25);
+			task_name.setLocation(x+20, y);
+			this.add(task_name);
+		
 			JButton edit_button = new JButton("edit");
-			edit_button.setSize(100,25);
-			edit_button.setLocation(row_x+125, row_y);
+			edit_button.setSize(70,25);
+			edit_button.setLocation(getWidth()-90, row_y);
 			edit_button.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -78,8 +78,8 @@ public class ConfigPanel extends JPanel {
 			this.add(edit_button);
 			
 			JButton del_button = new JButton("del");
-			del_button.setSize(100,25);
-			del_button.setLocation(row_x+225, row_y);
+			del_button.setSize(70,25);
+			del_button.setLocation(getWidth()-170, row_y);
 			del_button.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -87,14 +87,14 @@ public class ConfigPanel extends JPanel {
 					Config.properties.remove(name+"_last_date");
 					Config.save();
 					parent.dispose();
-					new ConfigFrame();
+					new ConfigFrame(parent.parent);
 				}
 			});
 			this.add(del_button);
 			
-			
-			
 			row_y += 25;
+			
+			parent.setSize(this.getWidth(), 70 + row_y);
 		}
 	}
 }

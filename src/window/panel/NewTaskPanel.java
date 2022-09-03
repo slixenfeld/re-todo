@@ -63,7 +63,7 @@ public class NewTaskPanel extends JPanel {
 				Config.save();
 				parent.parent.parent.dispose();
 				parent.dispose();
-				new ConfigFrame();
+				new ConfigFrame(parent.parent.parent.parent);
 			}
 		});
 		this.add(save_button);

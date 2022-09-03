@@ -21,7 +21,8 @@ public class MainPanel extends JPanel{
 	int row_x = 25;
 	int row_y = 50;
 	
-	JFrame parent;
+	public JFrame parent;
+	MainPanel this_obj = this;
 	
 	public MainPanel(JFrame parent) {
 		this.parent = parent;
@@ -41,7 +42,8 @@ public class MainPanel extends JPanel{
 		config_button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new ConfigFrame();
+				new ConfigFrame(this_obj);
+				config_button.setEnabled(false);
 			}
 		});
 		this.add(config_button);
@@ -79,7 +81,9 @@ public class MainPanel extends JPanel{
 			}
 			this.add(task_button);
 			
-			row_y += 25;
+			row_y += 30;
+	
+			parent.setSize(this.getWidth(), 70 + row_y);
 		}
 	}
 
