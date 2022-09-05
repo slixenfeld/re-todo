@@ -48,7 +48,7 @@ public class Config {
 	
 	public static void save() {
 		try {
-			FileOutputStream stream = new FileOutputStream(getConfigPath() + "/retodo.conf");
+			FileOutputStream stream = new FileOutputStream(getConfigPath());
 			properties.store(stream, null);
 			stream.flush();
 			stream.close();
@@ -59,7 +59,7 @@ public class Config {
 	
 	public static void load() {
 		try {
-			FileInputStream stream = new FileInputStream(getConfigPath() + "/retodo.conf");
+			FileInputStream stream = new FileInputStream(getConfigPath());
 			properties.load(stream);
 			stream.close();
 		} catch (IOException e) {
@@ -70,11 +70,11 @@ public class Config {
 	private static String getConfigPath() {
 		String os = (System.getProperty("os.name").toLowerCase());
 		if (os.contains("win")) {
-			return System.getenv("APPDATA");
+			return System.getenv("APPDATA") + "/retodo.conf";
 		} else if (os.contains("nux") || os.contains("nix") || os.contains("aix") || os.contains("mac") ) {
-			return "/home/" + System.getProperty("user.name") + "/.local/share/applications";
+			return "/home/" + System.getProperty("user.name") + "/.local/share/applications/retodo.conf";
 		} else {
-			return "";
+			return "/retodo.conf";
 		}
 	}
 }
