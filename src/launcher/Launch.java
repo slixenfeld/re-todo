@@ -27,7 +27,6 @@ public class Launch {
         } catch (Exception e) {
         	System.out.println("setting look and feel failed: " + e.getMessage());
         }
-        Config.init();
 		new MainFrame();
 	}
 }
