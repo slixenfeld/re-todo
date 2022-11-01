@@ -66,40 +66,26 @@ public class MainPanel extends JPanel{
 		});
 		this.add(close_button);
 		
+		addTaskButtons();
+	}
+
+	public void addTaskButtons() {
 		Config.properties.entrySet().stream().forEach(
-			entry -> show_row( (String)entry.getKey(), (String)entry.getValue(), row_x, row_y));
+			entry -> addTaskButton( (String)entry.getKey(), (String)entry.getValue(), row_x, row_y));
 	}
 	
-	private void show_row(String key, String value, int x, int y) {
+	private void addTaskButton(String key, String value, int x, int y) {
 		
-		String name = (key.contains("_days")) ? key.substring(0, key.length()-5 ) : "" ;
+		String short_key = (key.contains("_days")) ? key.substring(0, key.length()-5 ) : "" ;
 	
-		if (!name.isEmpty()) {
+		if (!short_key.isEmpty()) {
 					
-			int days_to_expiration = getExpiredTime(key, name);
-			
-			JButton task_button = new JButton(name);
-			task_button.setSize(300,25);
+			TaskButton task_button = new TaskButton(parent_obj, short_key, getExpiredTime(key, short_key));
+			task_button.setDefaults();
 			task_button.setLocation(x, y);
-			task_button.setEnabled(false);
-			task_button.setText(task_button.getText() + " ("+days_to_expiration+")");
-			if (days_to_expiration <= 0) {
-				task_button.setEnabled(true);
-				task_button.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						Config.properties.put(name+"_last_date", LocalDate.now().toString());
-						Config.save();
-						
-						parent_obj.dispose();
-						new MainFrame();
-					}
-				});
-			}
 			this.add(task_button);
 			
 			row_y += 30;
-	
 			parent_obj.setSize(this.getWidth(), 70 + row_y);
 		}
 	}
