@@ -15,6 +15,7 @@ import config.Config;
 import lombok.Getter;
 import window.frame.ConfigFrame;
 import window.frame.MainFrame;
+import window.ui.TaskButton;
 
 @Getter
 public class MainPanel extends JPanel{

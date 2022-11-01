@@ -1,4 +1,4 @@
-package window.panel;
+package window.ui;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
