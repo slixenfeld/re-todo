@@ -38,7 +38,7 @@ public class ConfigPanel extends JPanel {
 		Config.properties.entrySet().stream().forEach(
 				entry -> add_config_row( (String)entry.getKey(), (String)entry.getValue(), row_x, row_y));
 		
-		new_button = new JButton("add new todo...");
+		new_button = new JButton("add new task...");
 		new_button.setSize(200,25);
 		new_button.setLocation(getWidth()/2 - new_button.getWidth()/2 ,row_y +10);
 		new_button.addActionListener(new ActionListener() {
