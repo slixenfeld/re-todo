@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import window.panel.MainPanel;
 
 public class MainFrame extends JFrame {
+	
 	private static final long serialVersionUID = 1L;
 	private static Point point = new Point();
 	private MainFrame this_obj = this;
@@ -23,6 +24,7 @@ public class MainFrame extends JFrame {
 		setup_frame();
 		this.setLocation(location);
 	}
+	
 	private void setup_frame() {
 		setup_frame_settings();
 		add_listeners();
@@ -57,5 +59,4 @@ public class MainFrame extends JFrame {
 		this.setResizable(true);
 	}
 	
-
 }
