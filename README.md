@@ -4,6 +4,15 @@ Desktop Application for managing reaccuring TODO tasks.
 
 ![UI](ui-screenshot.png "ui")
 
+---
+
+# How To Use
+* Open re-todo.jar
+
+# Configuration File
+* Windows: %AppData%\Roaming\retodo.conf
+* Linux: /home/[user]/.local/share/applications/retodo.conf
+
 # Themes
 The theme can be set as a JVM argument: lite,ocean,mars. <br/>
 java -jar re-todo.jar `theme`
