@@ -16,6 +16,8 @@ public class AbstractPanel extends JPanel {
 	JButton close_button;
 	JButton new_button;
 	
+	JPanel thisPanel = this;
+	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -36,23 +38,13 @@ public class AbstractPanel extends JPanel {
 		close_button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				if (thisPanel.getClass() == MainPanel.class) {
+					System.exit(0);
+				} else {
+					MainFrameSingleton.getInstance().loadPanel(new MainPanel());
+				}
 			}
 		});
 		this.add(close_button);
-		
-		
-		if (this.getClass() != MainPanel.class) {
-			new_button = new JButton("Return..");
-			new_button.setSize(100,25);
-			new_button.setLocation(5, 5);
-			new_button.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					MainFrameSingleton.getInstance().loadPanel(new MainPanel());
-				}
-			});
-			this.add(new_button);
-		}
 	}
 }

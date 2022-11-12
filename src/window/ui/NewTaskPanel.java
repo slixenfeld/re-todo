@@ -18,6 +18,7 @@ public class NewTaskPanel extends AbstractPanel {
 	JTextField task_name_field;
 	JSpinner task_repeat_days;
 	JButton save_button;
+	JButton cancel_button;
 	
 	String preset_name = "";
 	String preset_days = "";
@@ -61,8 +62,8 @@ public class NewTaskPanel extends AbstractPanel {
 		this.add(task_repeat_days);
 		
 		save_button = new JButton("Save");
-		save_button.setSize(100,25);
-		save_button.setLocation(225,75 +30);
+		save_button.setSize(70,25);
+		save_button.setLocation(185,85 +30);
 		save_button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -76,5 +77,16 @@ public class NewTaskPanel extends AbstractPanel {
 			}
 		});
 		this.add(save_button);
+		
+		cancel_button = new JButton("cancel");
+		cancel_button.setSize(70,25);
+		cancel_button.setLocation(275,85 +30);
+		cancel_button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainFrameSingleton.getInstance().loadPanel(new ConfigPanel());
+			}
+		});
+		this.add(cancel_button);
 	}
 }
