@@ -6,18 +6,16 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import config.Config;
 import lombok.AllArgsConstructor;
-import window.frame.MainFrame;
+import window.frame.MainFrameSingleton;
 
 @AllArgsConstructor
 public class TaskButton extends JButton {
 	
 	private static final long serialVersionUID = 1L;
-	JFrame parent;
 	String key;
 	int days;
 
@@ -52,9 +50,7 @@ public class TaskButton extends JButton {
 				public void actionPerformed(ActionEvent e) {
 					Config.properties.put(key+"_last_date", LocalDate.now().toString());
 					Config.save();
-					
-					parent.dispose();
-					new MainFrame();
+					MainFrameSingleton.getInstance().loadPanel(new MainPanel());
 				}
 			});
 		}

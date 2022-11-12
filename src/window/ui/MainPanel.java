@@ -1,47 +1,37 @@
-package window.panel;
+package window.ui;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import config.Config;
 import lombok.Getter;
-import window.frame.ConfigFrame;
-import window.frame.MainFrame;
-import window.ui.TaskButton;
+import window.frame.MainFrameSingleton;
 
 @Getter
-public class MainPanel extends JPanel{
+public class MainPanel extends AbstractPanel {
 	private static final long serialVersionUID = 1L;
 	
 	JButton config_button;
-	JButton close_button;
 	
 	int row_x = 25;
 	int row_y = 50;
 	
-	public JFrame parent_obj;
 	public MainPanel this_obj = this;
 	
-	public MainPanel(JFrame parent) {
-		this.parent_obj = parent;
-		
+	public MainPanel() {
 		Config.load();
-		
-		this.setSize(parent.getSize());
-		this.setLayout(null);
-		
+		this.setSize(0x171,0x200);
 		setup_ui_components();
 	}
 	
-	private void setup_ui_components() {
+	@Override
+	public void setup_ui_components() {
+		super.setup_ui_components();
+		
 		config_button = new JButton(new ImageIcon(this.getClass().getResource("/res/config.png")));
 		config_button.setFocusable(false);
 		config_button.setSize(35,35);
@@ -49,23 +39,11 @@ public class MainPanel extends JPanel{
 		config_button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new ConfigFrame(this_obj);
-				config_button.setEnabled(false);
+				MainFrameSingleton.getInstance().loadPanel(new ConfigPanel());
 			}
 		});
 		this.add(config_button);
-		
-		close_button = new JButton("x");
-		close_button.setFocusable(false);
-		close_button.setSize(40,25);
-		close_button.setLocation(getWidth()-41, 1);
-		close_button.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		this.add(close_button);
+
 		
 		addTaskButtons();
 	}
@@ -81,13 +59,13 @@ public class MainPanel extends JPanel{
 	
 		if (!short_key.isEmpty()) {
 					
-			TaskButton task_button = new TaskButton(parent_obj, short_key, getExpiredTime(key, short_key));
+			TaskButton task_button = new TaskButton(short_key, getExpiredTime(key, short_key));
 			task_button.setDefaults();
 			task_button.setLocation(x, y);
 			this.add(task_button);
 			
 			row_y += 30;
-			parent_obj.setSize(this.getWidth(), 70 + row_y);
+			MainFrameSingleton.getInstance().setSize(this.getWidth(), 70 + row_y);
 		}
 	}
 
@@ -118,15 +96,5 @@ public class MainPanel extends JPanel{
 		} 
 		return -999999999;
 	}
-	
-	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
 
-		g.setColor(new Color(21, 81, 89));
-		g.drawRect(0, 0, getWidth()-1, getHeight()-1);
-		g.setColor(new Color(41, 164, 181));
-		g.drawRect(0, 0, getWidth(), getHeight());
-		
-	}
 }

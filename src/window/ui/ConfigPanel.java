@@ -1,4 +1,4 @@
-package window.panel;
+package window.ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,34 +6,27 @@ import java.time.LocalDate;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import config.Config;
 import lombok.Getter;
-import window.frame.ConfigFrame;
-import window.frame.NewTaskFrame;
+import window.frame.MainFrameSingleton;
 
 @Getter
-public class ConfigPanel extends JPanel {
+public class ConfigPanel extends AbstractPanel {
 	private static final long serialVersionUID = 1L;
 
 	JButton new_button;
 	int row_x = 25;
-	int row_y = 20;
+	int row_y = 50;
 		
-	public ConfigPanel this_obj = this;
-	public ConfigFrame parent_obj;
-	
-	public ConfigPanel(ConfigFrame parent) {
-		this.parent_obj = parent;
-		this.setSize(parent.getSize());
-		this.setLayout(null);
-
-		
+	public ConfigPanel() {
+		this.setSize(0x251,0x200);
 		setup_ui_components();
 	}
 	
-	private void setup_ui_components() {
+	@Override
+	public void setup_ui_components() {
+		super.setup_ui_components();
 		
 		Config.properties.entrySet().stream().forEach(
 				entry -> add_config_row( (String)entry.getKey(), (String)entry.getValue(), row_x, row_y));
@@ -44,10 +37,11 @@ public class ConfigPanel extends JPanel {
 		new_button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new NewTaskFrame(this_obj, "", "");
+				MainFrameSingleton.getInstance().loadPanel(new NewTaskPanel("", ""));
 			}
 		});
 		this.add(new_button);
+	
 	}
 	
 	private void add_config_row(String key, String value, int x, int y) {
@@ -72,7 +66,7 @@ public class ConfigPanel extends JPanel {
 			edit_button.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					new NewTaskFrame(this_obj, name, Config.properties.getProperty(key));
+				MainFrameSingleton.getInstance().loadPanel(new NewTaskPanel(name, Config.properties.getProperty(key)));
 				}
 			});
 			this.add(edit_button);
@@ -86,8 +80,7 @@ public class ConfigPanel extends JPanel {
 					Config.properties.remove(key);
 					Config.properties.remove(name+"_last_date");
 					Config.save();
-					parent_obj.dispose();
-					new ConfigFrame(parent_obj.parent_obj);
+					MainFrameSingleton.getInstance().loadPanel(new ConfigPanel());
 				}
 			});
 			this.add(del_button);
@@ -101,15 +94,14 @@ public class ConfigPanel extends JPanel {
 					Config.properties.put(""+name+"_last_date", LocalDate.now()
 							.minusDays(1 + Integer.parseInt((String)Config.properties.getProperty(key))).toString());
 					Config.save();
-					parent_obj.dispose();
-					new ConfigFrame(parent_obj.parent_obj);
+					MainFrameSingleton.getInstance().loadPanel(new ConfigPanel());
 				}
 			});
 			this.add(reset_button);
 			
 			row_y += 30;
+			MainFrameSingleton.getInstance().setSize(this.getWidth(), 70 + row_y +25);
 			
-			parent_obj.setSize(this.getWidth(), 70 + row_y +25);
 		}
 	}
 }
