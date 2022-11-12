@@ -32,7 +32,7 @@ public class MainPanel extends AbstractPanel {
 	public void setup_ui_components() {
 		super.setup_ui_components();
 		
-		config_button = new JButton(new ImageIcon(this.getClass().getResource("/res/config.png")));
+		config_button = new JButton(new ImageIcon(this.getClass().getResource("/resources/icons/config.png")));
 		config_button.setFocusable(false);
 		config_button.setSize(35,35);
 		config_button.setLocation(1,1);
@@ -44,7 +44,6 @@ public class MainPanel extends AbstractPanel {
 		});
 		this.add(config_button);
 
-		
 		addTaskButtons();
 	}
 
