@@ -8,6 +8,8 @@ import mdlaf.themes.JMarsDarkTheme;
 import mdlaf.themes.MaterialLiteTheme;
 import mdlaf.themes.MaterialOceanicTheme;
 import window.frame.MainFrame;
+import window.frame.MainFrameSingleton;
+import window.ui.MainPanel;
 
 public class Launch {
 	public static void main(String args[]) {
@@ -27,6 +29,6 @@ public class Launch {
         } catch (Exception e) {
         	System.out.println("setting look and feel failed: " + e.getMessage());
         }
-		new MainFrame();
+		MainFrameSingleton.getInstance().loadPanel(new MainPanel());
 	}
 }
