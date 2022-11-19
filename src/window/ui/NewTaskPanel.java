@@ -73,7 +73,7 @@ public class NewTaskPanel extends AbstractPanel {
 				}
 				Config.save();
 				
-				MainFrameSingleton.getInstance().loadPanel(new ConfigPanel());
+				MainFrameSingleton.getInstance().loadPanel(new MainPanel());
 			}
 		});
 		this.add(save_button);
