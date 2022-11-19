@@ -57,8 +57,15 @@ public class MainPanel extends AbstractPanel {
 		String short_key = (key.contains("_days")) ? key.substring(0, key.length()-5 ) : "" ;
 	
 		if (!short_key.isEmpty()) {
-					
-			TaskButton task_button = new TaskButton(short_key, getExpiredTime(key, short_key));
+			
+			boolean repeats;
+			
+			if (Config.properties.getProperty(short_key + "_repeating") == null)
+				repeats = true;
+			else
+				repeats = Config.properties.getProperty(short_key + "_repeating").equals("true");
+
+			TaskButton task_button = new TaskButton(short_key, getExpiredTime(key, short_key), repeats);
 			task_button.setDefaults();
 			task_button.setLocation(x, y);
 			this.add(task_button);

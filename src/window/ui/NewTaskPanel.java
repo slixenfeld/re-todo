@@ -2,9 +2,12 @@ package window.ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.time.LocalDate;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
@@ -17,15 +20,21 @@ public class NewTaskPanel extends AbstractPanel {
 	
 	JTextField task_name_field;
 	JSpinner task_repeat_days;
+	
 	JButton save_button;
 	JButton cancel_button;
+	JCheckBox repeating_checkbox;
+	JLabel repeating_label;
+	
+	boolean repeating = false;
 	
 	String preset_name = "";
 	String preset_days = "";
 	
-	public NewTaskPanel(String task_name, String days) {
+	public NewTaskPanel(String task_name, String days, boolean repeats) {
 		this.preset_name = task_name;
 		this.preset_days = days;
+		this.repeating = repeats;
 		
 		this.setSize(0x171,0x0A0);
 		setup_ui_components();
@@ -60,7 +69,23 @@ public class NewTaskPanel extends AbstractPanel {
 			task_repeat_days.setValue(Integer.parseInt(preset_days));
 		}
 		this.add(task_repeat_days);
+			
+		repeating_label = new JLabel("repeating");
+		repeating_label.setBounds(25,130,120,30);
+		add(repeating_label);
 		
+		repeating_checkbox = new JCheckBox();
+		repeating_checkbox.setBounds(100,140,25,16);
+		repeating_checkbox.setSelected(repeating);
+		repeating_checkbox.addItemListener(new ItemListener() {
+			@Override
+	        public void itemStateChanged(ItemEvent e) {  
+				repeating = e.getStateChange() == 1;
+	         }
+		});
+
+		add(repeating_checkbox);
+	
 		save_button = new JButton("Save");
 		save_button.setSize(70,25);
 		save_button.setLocation(185,85 +30);
@@ -71,6 +96,8 @@ public class NewTaskPanel extends AbstractPanel {
 				if (Config.properties.get(""+task_name_field.getText()+"_last_date") == null) {
 					Config.properties.put(""+task_name_field.getText()+"_last_date", LocalDate.now().toString());
 				}
+				Config.properties.put(""+task_name_field.getText()+"_repeating", ""+ repeating );
+				
 				Config.save();
 				
 				MainFrameSingleton.getInstance().loadPanel(new MainPanel());

@@ -37,7 +37,7 @@ public class ConfigPanel extends AbstractPanel {
 		new_button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainFrameSingleton.getInstance().loadPanel(new NewTaskPanel("", ""));
+				MainFrameSingleton.getInstance().loadPanel(new NewTaskPanel("", "", false));
 			}
 		});
 		this.add(new_button);
@@ -66,7 +66,15 @@ public class ConfigPanel extends AbstractPanel {
 			edit_button.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-				MainFrameSingleton.getInstance().loadPanel(new NewTaskPanel(name, Config.properties.getProperty(key)));
+					
+					boolean repeats;
+					
+					if (Config.properties.getProperty(name + "_repeating") == null)
+						repeats = true;
+					else
+						repeats = Config.properties.getProperty(name + "_repeating").equals("true");
+						
+				MainFrameSingleton.getInstance().loadPanel(new NewTaskPanel(name, Config.properties.getProperty(key), repeats));
 				}
 			});
 			this.add(edit_button);
@@ -79,6 +87,9 @@ public class ConfigPanel extends AbstractPanel {
 				public void actionPerformed(ActionEvent e) {
 					Config.properties.remove(key);
 					Config.properties.remove(name+"_last_date");
+					try {
+						Config.properties.remove(name+"_repeating");
+					} catch (Exception e2) {};
 					Config.save();
 					MainFrameSingleton.getInstance().loadPanel(new ConfigPanel());
 				}
