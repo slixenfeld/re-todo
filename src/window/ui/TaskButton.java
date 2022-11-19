@@ -43,7 +43,7 @@ public class TaskButton extends JButton {
 	
 	public void setDefaults() {
 		
-		repeat_label.setText((repeats) ? "R" : "1");
+		repeat_label.setText((repeats) ? "R" : "");
 		repeat_label.setLocation(5, 0);
 		repeat_label.setSize(30,25);
 		repeat_label.setFont(new Font("Verdana", Font.BOLD, 12));
