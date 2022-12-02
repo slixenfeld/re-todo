@@ -94,6 +94,10 @@ public class ConfigPanel extends AbstractPanel {
 					try {
 						Config.properties.remove(name+"_repeating");
 					} catch (Exception e2) {};
+					try {
+						Config.properties.remove(name+"_category");
+					} catch (Exception e2) {};
+					
 					Config.save();
 					MainFrameSingleton.getInstance().loadPanel(new ConfigPanel());
 				}
