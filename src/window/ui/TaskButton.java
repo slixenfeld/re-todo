@@ -71,9 +71,8 @@ public class TaskButton extends JButton {
 						} else {
 							Config.properties.remove(key+"_days");
 							Config.properties.remove(key+"_last_date");
-							try {
-								Config.properties.remove(key+"_repeating");
-							} catch (Exception e2) {}	
+							try {Config.properties.remove(key+"_category");} catch (Exception e2) {}	
+							try { Config.properties.remove(key+"_repeating"); } catch (Exception e3) {}
 						}
 
 					Config.save();

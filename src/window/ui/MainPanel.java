@@ -3,22 +3,29 @@ package window.ui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import config.Config;
 import lombok.Getter;
+import window.frame.MainFrame;
 import window.frame.MainFrameSingleton;
 
 @Getter
 public class MainPanel extends AbstractPanel {
+	
 	private static final long serialVersionUID = 1L;
+
 	
 	JButton config_button;
 	
 	int row_x = 25;
 	int row_y = 50;
+	
+	private List<String> categories;
 	
 	public MainPanel this_obj = this;
 	
@@ -44,9 +51,41 @@ public class MainPanel extends AbstractPanel {
 		});
 		this.add(config_button);
 
+		loadCategories();
+		addTabButtons();
 		addTaskButtons();
 	}
 
+	private void loadCategories() {
+		
+		categories = new ArrayList<>();	
+		categories.add("");
+		
+		Config.properties.entrySet().stream()
+			.filter(entry -> entry.getKey().toString().contains("_category"))
+			.forEach(entry -> {
+				if(!categories.contains(entry.getValue()))
+					categories.add((String)entry.getValue()); 
+			});
+	}
+	
+	private void addTabButtons() {
+		int index = 0;
+		int width = ((0x171 -70) / categories.size());
+		int spacing = 10;
+		for (String category : categories) {
+			addTabButton(category,20 + spacing + (index * width), 2 , width , 25);
+			index++;
+		}
+	}
+	
+	private void addTabButton(String name, int x, int y, int w, int h) {
+		TabButton tabButton = new TabButton(name);
+		tabButton.setDefaults();
+		tabButton.setBounds(x, y, w, h);
+		this.add(tabButton);
+	}
+	
 	public void addTaskButtons() {
 		Config.properties.entrySet().stream().forEach(
 			entry -> addTaskButton( (String)entry.getKey(), (String)entry.getValue(), row_x, row_y));
@@ -58,20 +97,27 @@ public class MainPanel extends AbstractPanel {
 	
 		if (!short_key.isEmpty()) {
 			
-			boolean repeats;
+			String category = "";
+			if (Config.properties.getProperty(short_key + "_category") != null)
+				category = Config.properties.getProperty(short_key + "_category");
 			
-			if (Config.properties.getProperty(short_key + "_repeating") == null)
-				repeats = true;
-			else
-				repeats = Config.properties.getProperty(short_key + "_repeating").equals("true");
-
-			TaskButton task_button = new TaskButton(short_key, getExpiredTime(key, short_key), repeats);
-			task_button.setDefaults();
-			task_button.setLocation(x, y);
-			this.add(task_button);
+			if (MainFrame.currentTab.equals("") || category.equals(MainFrame.currentTab))
+			{
+				boolean repeats;
+				
+				if (Config.properties.getProperty(short_key + "_repeating") == null)
+					repeats = true;
+				else
+					repeats = Config.properties.getProperty(short_key + "_repeating").equals("true");
+	
+				TaskButton task_button = new TaskButton(short_key, getExpiredTime(key, short_key), repeats);
+				task_button.setDefaults();
+				task_button.setLocation(x, y);
+				this.add(task_button);
 			
-			row_y += 30;
-			MainFrameSingleton.getInstance().setSize(this.getWidth(), 70 + row_y);
+				row_y += 30;
+				MainFrameSingleton.getInstance().setSize(this.getWidth(), 70 + row_y);
+			}
 		}
 	}
 
