@@ -16,6 +16,8 @@ public class MainFrame extends JFrame {
 	public static MainFrame window;
 	private JPanel panel = new JPanel();
 	
+	public static String currentTab = "";	
+	
 	public MainFrame() {
 		setup_frame();
 	}

@@ -25,14 +25,19 @@ public class NewTaskPanel extends AbstractPanel {
 	JButton cancel_button;
 	JCheckBox repeating_checkbox;
 	JLabel repeating_label;
+	JLabel category_label;
+	JTextField category_field;
 	
 	boolean repeating = false;
 	
 	String preset_name = "";
 	String preset_days = "";
 	
-	public NewTaskPanel(String task_name, String days, boolean repeats) {
+	String category;
+	
+	public NewTaskPanel(String task_name, String category, String days, boolean repeats) {
 		this.preset_name = task_name;
+		this.category = category;
 		this.preset_days = days;
 		this.repeating = repeats;
 		
@@ -83,16 +88,24 @@ public class NewTaskPanel extends AbstractPanel {
 				repeating = e.getStateChange() == 1;
 	         }
 		});
-
 		add(repeating_checkbox);
 	
+		category_label = new JLabel("category");
+		category_label.setBounds(180, 80, 100,25);
+		add(category_label);
+		
+		category_field = new JTextField(category);
+		category_field.setBounds(180,100,100,25);
+		add(category_field);
+		
 		save_button = new JButton("Save");
 		save_button.setSize(70,25);
-		save_button.setLocation(185,85 +30);
+		save_button.setLocation(185,85 +43);
 		save_button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Config.properties.put(""+task_name_field.getText()+"_days", ""+task_repeat_days.getValue());
+				Config.properties.put(""+task_name_field.getText()+"_category", ""+category_field.getText());
 				if (Config.properties.get(""+task_name_field.getText()+"_last_date") == null) {
 					Config.properties.put(""+task_name_field.getText()+"_last_date", LocalDate.now().toString());
 				}
@@ -107,7 +120,7 @@ public class NewTaskPanel extends AbstractPanel {
 		
 		cancel_button = new JButton("cancel");
 		cancel_button.setSize(70,25);
-		cancel_button.setLocation(275,85 +30);
+		cancel_button.setLocation(275,85 +43);
 		cancel_button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
