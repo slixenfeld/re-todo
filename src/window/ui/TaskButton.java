@@ -27,6 +27,7 @@ public class TaskButton extends JButton {
 	private final int WIDTH = 359;
 	private final int HEIGHT = 25;
 	
+	WindowType wtype;
 	String key;
 	int days;
 	boolean repeats;
@@ -80,7 +81,10 @@ public class TaskButton extends JButton {
 						}
 
 						Config.save();
-						MainFrameSingleton.getInstance().loadPanel(new MainPanel());
+						if (wtype == WindowType.MAIN)
+							MainFrameSingleton.getInstance().loadPanel(new MainPanel());
+						else if (wtype == WindowType.MINIMAL)
+							MainFrameSingleton.getInstance().loadPanel(new MinimalPanel());
 						
         		    } else if (e.getButton() == MouseEvent.BUTTON3) {
         		    	

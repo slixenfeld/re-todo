@@ -21,6 +21,7 @@ public class MainPanel extends AbstractPanel {
 
 	
 	JButton add_button;
+	JButton collapse_button;
 	
 	int row_x = 5;
 	int row_y = 0;
@@ -50,6 +51,18 @@ public class MainPanel extends AbstractPanel {
 			}
 		});
 		this.add(add_button);
+		
+		collapse_button = new JButton(new ImageIcon(this.getClass().getResource("/resources/icons/collapse.png")));
+		collapse_button.setFocusable(false);
+		collapse_button.setSize(35,34);
+		collapse_button.setLocation(37,1);
+		collapse_button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainFrameSingleton.getInstance().loadPanel(new MinimalPanel());
+			}
+		});
+		this.add(collapse_button);
 
 		loadCategories();
 		addTabButtons();
@@ -112,7 +125,7 @@ public class MainPanel extends AbstractPanel {
 				else
 					repeats = Config.properties.getProperty(short_key + "_repeating").equals("true");
 	
-				TaskButton task_button = new TaskButton(short_key, getExpiredTime(key, short_key), repeats);
+				TaskButton task_button = new TaskButton(WindowType.MAIN, short_key, getExpiredTime(key, short_key), repeats);
 				task_button.setDefaults();
 				task_button.setLocation(x, y);
 				this.add(task_button);
