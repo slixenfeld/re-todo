@@ -41,7 +41,7 @@ public class MainPanel extends AbstractPanel {
 		
 		add_button = new JButton(new ImageIcon(this.getClass().getResource("/resources/icons/add.png")));
 		add_button.setFocusable(false);
-		add_button.setSize(35,35);
+		add_button.setSize(35,34);
 		add_button.setLocation(1,1);
 		add_button.addActionListener(new ActionListener() {
 			@Override
