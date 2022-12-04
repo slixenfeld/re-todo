@@ -3,7 +3,7 @@
 Desktop Application for managing reaccuring TODO tasks.
 
 ![UI](main.png "ui")
-![UI](new task.png "ui")
+![UI](new_task.png "ui")
 ![UI](category_test.png "ui")
 
 ---
