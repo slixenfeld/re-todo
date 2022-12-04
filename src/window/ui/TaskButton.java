@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.time.LocalDate;
 
 import javax.swing.JButton;
@@ -11,13 +14,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import config.Config;
+import javafx.scene.input.MouseButton;
 import lombok.AllArgsConstructor;
+import window.frame.MainFrame;
 import window.frame.MainFrameSingleton;
 
 @AllArgsConstructor
 public class TaskButton extends JButton {
 	
 	private static final long serialVersionUID = 1L;
+	
+	private final int WIDTH = 359;
+	private final int HEIGHT = 25;
+	
 	String key;
 	int days;
 	boolean repeats;
@@ -36,7 +45,7 @@ public class TaskButton extends JButton {
 			if (days < -25) days = -25;
 			backgroundColor = new Color(0 + (-days * 10),0,0, 40);		
 		}
-		dueColorPanel.setSize(299,25);
+		dueColorPanel.setSize(WIDTH-1,HEIGHT);
 		dueColorPanel.setBackground(backgroundColor);
 		this.add(dueColorPanel);
 	}
@@ -44,22 +53,17 @@ public class TaskButton extends JButton {
 	public void setDefaults() {
 		
 		repeat_label.setText((repeats) ? "R" : "");
-		repeat_label.setLocation(5, 0);
-		repeat_label.setSize(30,25);
-		repeat_label.setFont(new Font("Verdana", Font.BOLD, 12));
-		add(repeat_label);
+        repeat_label.setLocation(5, 0);
+        repeat_label.setSize(30,25);
+        repeat_label.setFont(new Font("Verdana", Font.BOLD, 12));
+        add(repeat_label);
 		
-		this.setLayout(null);
-		this.setSize(300,25);
-		this.setEnabled(false);
-		this.setText(key + " ("+days+")");
-		setDueColor(days);
-		if (days <= 0) {
-			this.setEnabled(true);
-			this.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					
+        this.addMouseListener(new MouseAdapter() {
+        	  public void mouseClicked(MouseEvent e) {
+        		    if (e.getButton() == MouseEvent.NOBUTTON) {
+        		    	
+        		    } else if (e.getButton() == MouseEvent.BUTTON1) {
+    					
 						boolean repeats;
 						if (Config.properties.getProperty(key + "_repeating") == null)
 							repeats = true;
@@ -71,14 +75,26 @@ public class TaskButton extends JButton {
 						} else {
 							Config.properties.remove(key+"_days");
 							Config.properties.remove(key+"_last_date");
-							try {Config.properties.remove(key+"_category");} catch (Exception e2) {}	
+							try { Config.properties.remove(key+"_category"); } catch (Exception e2) {}	
 							try { Config.properties.remove(key+"_repeating"); } catch (Exception e3) {}
 						}
 
-					Config.save();
-					MainFrameSingleton.getInstance().loadPanel(new MainPanel());
-				}
-			});
-		}
+						Config.save();
+						MainFrameSingleton.getInstance().loadPanel(new MainPanel());
+						
+        		    } else if (e.getButton() == MouseEvent.BUTTON3) {
+        		    	
+        		    	MainFrame.editTask(key);
+        		    	
+        		    }
+        	  }
+        });
+        
+		this.setLayout(null);
+		this.setSize(WIDTH,HEIGHT);
+		this.setEnabled(true);
+		this.setText(key + " ("+days+")");
+		setDueColor(days);
+		
 	}
 }
