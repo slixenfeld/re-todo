@@ -20,10 +20,10 @@ public class MainPanel extends AbstractPanel {
 	private static final long serialVersionUID = 1L;
 
 	
-	JButton config_button;
+	JButton add_button;
 	
-	int row_x = 25;
-	int row_y = 50;
+	int row_x = 5;
+	int row_y = 0;
 	
 	private List<String> categories;
 	
@@ -39,17 +39,17 @@ public class MainPanel extends AbstractPanel {
 	public void setup_ui_components() {
 		super.setup_ui_components();
 		
-		config_button = new JButton(new ImageIcon(this.getClass().getResource("/resources/icons/config.png")));
-		config_button.setFocusable(false);
-		config_button.setSize(35,35);
-		config_button.setLocation(1,1);
-		config_button.addActionListener(new ActionListener() {
+		add_button = new JButton(new ImageIcon(this.getClass().getResource("/resources/icons/add.png")));
+		add_button.setFocusable(false);
+		add_button.setSize(35,35);
+		add_button.setLocation(1,1);
+		add_button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainFrameSingleton.getInstance().loadPanel(new ConfigPanel());
+				MainFrameSingleton.getInstance().loadPanel(new NewTaskPanel("", "", "", false));
 			}
 		});
-		this.add(config_button);
+		this.add(add_button);
 
 		loadCategories();
 		addTabButtons();
@@ -71,10 +71,10 @@ public class MainPanel extends AbstractPanel {
 	
 	private void addTabButtons() {
 		int index = 0;
-		int width = ((0x171 -70) / categories.size());
-		int spacing = 10;
+		int width = ((0x171 ) / categories.size());
+
 		for (String category : categories) {
-			addTabButton(category,20 + spacing + (index * width), 2 , width , 25);
+			addTabButton(category, 1+ (index * width), 35 , width -2 , 25);
 			index++;
 		}
 	}
@@ -88,22 +88,24 @@ public class MainPanel extends AbstractPanel {
 	
 	public void addTaskButtons() {
 		Config.properties.entrySet().stream().forEach(
-			entry -> addTaskButton( (String)entry.getKey(), (String)entry.getValue(), row_x, row_y));
+			entry -> addTaskButton( (String)entry.getKey(), (String)entry.getValue(), row_x, 65 + row_y));
 	}
 	
 	private void addTaskButton(String key, String value, int x, int y) {
 		
 		String short_key = (key.contains("_days")) ? key.substring(0, key.length()-5 ) : "" ;
 	
+		
 		if (!short_key.isEmpty()) {
 			
 			String category = "";
 			if (Config.properties.getProperty(short_key + "_category") != null)
 				category = Config.properties.getProperty(short_key + "_category");
 			
-			if (MainFrame.currentTab.equals("") || category.equals(MainFrame.currentTab))
+			if (category.equals(MainFrame.currentTab))
 			{
 				boolean repeats;
+				
 				
 				if (Config.properties.getProperty(short_key + "_repeating") == null)
 					repeats = true;
@@ -116,7 +118,7 @@ public class MainPanel extends AbstractPanel {
 				this.add(task_button);
 			
 				row_y += 30;
-				MainFrameSingleton.getInstance().setSize(this.getWidth(), 70 + row_y);
+				MainFrameSingleton.getInstance().setSize(this.getWidth(), 65 + row_y);
 			}
 		}
 	}

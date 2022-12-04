@@ -9,6 +9,9 @@ import java.awt.event.MouseMotionAdapter;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import config.Config;
+import window.ui.NewTaskPanel;
+
 public class MainFrame extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
@@ -63,5 +66,21 @@ public class MainFrame extends JFrame {
                 MainFrameSingleton.getInstance().setLocation(p.x + e.getX() - point.x, p.y + e.getY() - point.y);
             }
         });
+	}
+	
+	public static void editTask(String name) {
+
+		boolean repeats;
+		String category = "";
+		
+		if (Config.properties.getProperty(name + "_category") != null)
+			category = Config.properties.getProperty(name + "_category");
+		
+		if (Config.properties.getProperty(name + "_repeating") == null)
+			repeats = true;
+		else
+			repeats = Config.properties.getProperty(name + "_repeating").equals("true");
+			
+	MainFrameSingleton.getInstance().loadPanel(new NewTaskPanel(name, category, Config.properties.getProperty(name + "_days"), repeats));
 	}
 }

@@ -33,7 +33,7 @@ public class AbstractPanel extends JPanel {
 		
 		close_button = new JButton("x");
 		close_button.setFocusable(false);
-		close_button.setSize(40,25);
+		close_button.setSize(40,35);
 		close_button.setLocation(getWidth()-41, 1);
 		close_button.addActionListener(new ActionListener() {
 			@Override
