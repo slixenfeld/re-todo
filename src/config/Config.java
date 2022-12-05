@@ -8,8 +8,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import lombok.NoArgsConstructor;
+import window.frame.MainFrame;
 import window.frame.MainFrameSingleton;
 import window.ui.MainPanel;
+import window.ui.MinimalPanel;
 
 @NoArgsConstructor
 public class Config {
@@ -24,11 +26,22 @@ public class Config {
 			refreshTimer.scheduleAtFixedRate(new TimerTask() {
 				@Override
 				public void run() {
-					MainFrameSingleton.getInstance().loadPanel(new MainPanel());
+					reloadPanel();
 				}
 			}, 100, (60000 * 60));
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	private static void reloadPanel() {
+		switch (MainFrame.currentWindowType) {
+			case MAIN:
+				MainFrameSingleton.getInstance().loadPanel(new MainPanel());
+				break;
+			case MINIMAL:
+				MainFrameSingleton.getInstance().loadPanel(new MinimalPanel());
+				break;
 		}
 	}
 	

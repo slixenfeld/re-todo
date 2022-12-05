@@ -19,7 +19,6 @@ public class MainPanel extends AbstractPanel {
 	
 	private static final long serialVersionUID = 1L;
 
-	
 	JButton add_button;
 	JButton collapse_button;
 	
@@ -31,6 +30,9 @@ public class MainPanel extends AbstractPanel {
 	public MainPanel this_obj = this;
 	
 	public MainPanel() {
+		
+		MainFrame.currentWindowType = WindowType.MAIN;
+		
 		Config.load();
 		this.setSize(0x171,0x200);
 		setup_ui_components();
