@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import config.Config;
 import window.ui.NewTaskPanel;
+import window.ui.WindowType;
 
 public class MainFrame extends JFrame {
 	
@@ -20,6 +21,7 @@ public class MainFrame extends JFrame {
 	private JPanel panel = new JPanel();
 	
 	public static String currentTab = "";	
+	public static WindowType currentWindowType = WindowType.MAIN;
 	
 	public MainFrame() {
 		setup_frame();

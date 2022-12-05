@@ -3,6 +3,7 @@ package window.ui;
 import java.time.LocalDate;
 
 import config.Config;
+import window.frame.MainFrame;
 import window.frame.MainFrameSingleton;
 
 public class MinimalPanel  extends AbstractPanel {
@@ -15,6 +16,9 @@ public class MinimalPanel  extends AbstractPanel {
 	public MinimalPanel this_obj = this;
 	
 	public MinimalPanel() {
+		
+		MainFrame.currentWindowType = WindowType.MINIMAL;
+		
 		Config.load();
 		this.setSize(0x171,0x200);
 		setup_ui_components();
