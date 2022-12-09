@@ -1,4 +1,4 @@
-package window.ui;
+package window.panel;
 
 import java.awt.Color;
 import java.awt.Graphics;

@@ -10,8 +10,8 @@ import java.util.TimerTask;
 import lombok.NoArgsConstructor;
 import window.frame.MainFrame;
 import window.frame.MainFrameSingleton;
-import window.ui.MainPanel;
-import window.ui.MinimalPanel;
+import window.panel.MainPanel;
+import window.panel.MinimalPanel;
 
 @NoArgsConstructor
 public class Config {

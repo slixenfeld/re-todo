@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import config.Config;
-import window.ui.NewTaskPanel;
+import window.panel.NewTaskPanel;
 import window.ui.WindowType;
 
 public class MainFrame extends JFrame {

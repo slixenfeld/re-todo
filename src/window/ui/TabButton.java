@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import lombok.AllArgsConstructor;
 import window.frame.MainFrame;
 import window.frame.MainFrameSingleton;
+import window.panel.MainPanel;
 
 @AllArgsConstructor
 public class TabButton extends JButton {

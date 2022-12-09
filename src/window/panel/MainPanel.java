@@ -1,4 +1,4 @@
-package window.ui;
+package window.panel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +13,9 @@ import config.Config;
 import lombok.Getter;
 import window.frame.MainFrame;
 import window.frame.MainFrameSingleton;
+import window.ui.TabButton;
+import window.ui.TaskButton;
+import window.ui.WindowType;
 
 @Getter
 public class MainPanel extends AbstractPanel {

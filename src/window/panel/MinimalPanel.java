@@ -1,10 +1,12 @@
-package window.ui;
+package window.panel;
 
 import java.time.LocalDate;
 
 import config.Config;
 import window.frame.MainFrame;
 import window.frame.MainFrameSingleton;
+import window.ui.TaskButton;
+import window.ui.WindowType;
 
 public class MinimalPanel  extends AbstractPanel {
 	
