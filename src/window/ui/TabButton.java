@@ -37,20 +37,20 @@ public class TabButton extends JButton {
 	}
 	
 	public void addColorPanel() {
-		JPanel colorPanel = new JPanel();
-		System.out.println("name:" + name + " / " + MainFrame.currentTab);
+		
+		JPanel bgPanel = new JPanel();
+		
 		if (name.equals(MainFrame.currentTab)) {
-			colorPanel.setSize(this.getWidth(),this.getHeight());
-			colorPanel.setBackground(new Color(50,50,50,40));
-			this.add(colorPanel);
+			bgPanel.setSize(this.getWidth(),this.getHeight());
+			bgPanel.setBackground(new Color(50,50,50,40));
+			this.add(bgPanel);
 		}
 		
-		JLabel repeat_label = new JLabel();
-		repeat_label.setText(name);
-        repeat_label.setLocation(10, 0);
-        repeat_label.setSize(this.getWidth(),this.getHeight());
-        repeat_label.setFont(new Font("", Font.BOLD, 16));
-        add(repeat_label);
-		
+		JLabel textLabel = new JLabel();
+		textLabel.setText(name);
+        textLabel.setLocation(10, 0);
+        textLabel.setSize(this.getWidth(),this.getHeight());
+        textLabel.setFont(new Font("", Font.BOLD, 16));
+        add(textLabel);
 	}
 }
