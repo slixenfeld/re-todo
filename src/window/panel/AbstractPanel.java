@@ -13,7 +13,6 @@ import window.frame.MainFrameSingleton;
 public class AbstractPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
-	JButton close_button;
 	JButton new_button;
 	
 	JPanel thisPanel = this;
@@ -26,16 +25,16 @@ public class AbstractPanel extends JPanel {
 		g.setColor(new Color(41, 164, 181));
 		g.drawRect(0, 0, getWidth(), getHeight());
 	}
-	
+
 	public void setup_ui_components() {
 		this.setLayout(null);
 		MainFrameSingleton.getInstance().setSize(this.getSize());
-		
-		close_button = new JButton("x");
-		close_button.setFocusable(false);
-		close_button.setSize(40,34);
-		close_button.setLocation(getWidth()-41, 1);
-		close_button.addActionListener(new ActionListener() {
+	
+		JButton closeButton = new JButton("x");
+		closeButton.setFocusable(false);
+		closeButton.setSize(40,34);
+		closeButton.setLocation(getWidth()-41, 1);
+		closeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (thisPanel.getClass() == MainPanel.class) {
@@ -45,6 +44,6 @@ public class AbstractPanel extends JPanel {
 				}
 			}
 		});
-		this.add(close_button);
+		this.add(closeButton);
 	}
 }
