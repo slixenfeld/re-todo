@@ -1,6 +1,5 @@
 package window.ui;
 
 public enum WindowType {
-	MAIN,
-	MINIMAL
+	MAIN, MINIMAL
 }

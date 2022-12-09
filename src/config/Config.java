@@ -15,15 +15,15 @@ import window.panel.MinimalPanel;
 
 @NoArgsConstructor
 public class Config {
-	
+
 	public static Properties properties = new Properties();
-	
-	private static Timer refreshTimer;
-	
+
+	private static Timer refresh;
+
 	public static void init() {
 		try {
-			refreshTimer = new Timer();
-			refreshTimer.scheduleAtFixedRate(new TimerTask() {
+			refresh = new Timer();
+			refresh.scheduleAtFixedRate(new TimerTask() {
 				@Override
 				public void run() {
 					reloadPanel();
@@ -33,18 +33,18 @@ public class Config {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private static void reloadPanel() {
 		switch (MainFrame.currentWindowType) {
-			case MAIN:
-				MainFrameSingleton.getInstance().loadPanel(new MainPanel());
-				break;
-			case MINIMAL:
-				MainFrameSingleton.getInstance().loadPanel(new MinimalPanel());
-				break;
+		case MAIN:
+			MainFrameSingleton.getInstance().loadPanel(new MainPanel());
+			break;
+		case MINIMAL:
+			MainFrameSingleton.getInstance().loadPanel(new MinimalPanel());
+			break;
 		}
 	}
-	
+
 	public static void save() {
 		try {
 			FileOutputStream stream = new FileOutputStream(getConfigPath());
@@ -55,7 +55,7 @@ public class Config {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void load() {
 		try {
 			FileInputStream stream = new FileInputStream(getConfigPath());
@@ -65,13 +65,15 @@ public class Config {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private static String getConfigPath() {
 		String os = (System.getProperty("os.name").toLowerCase());
 		if (os.contains("win")) {
 			return System.getenv("APPDATA") + "/retodo.conf";
-		} else if (os.contains("nux") || os.contains("nix") || os.contains("aix") || os.contains("mac") ) {
-			return "/home/" + System.getProperty("user.name") + "/.local/share/applications/retodo.conf";
+		} else if (os.contains("nux") || os.contains("nix") || os.contains("aix")
+				|| os.contains("mac")) {
+			return "/home/" + System.getProperty("user.name")
+					+ "/.local/share/applications/retodo.conf";
 		} else {
 			return "/retodo.conf";
 		}
