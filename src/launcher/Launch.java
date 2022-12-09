@@ -9,7 +9,7 @@ import mdlaf.themes.MaterialLiteTheme;
 import mdlaf.themes.MaterialOceanicTheme;
 import window.frame.MainFrame;
 import window.frame.MainFrameSingleton;
-import window.ui.MainPanel;
+import window.panel.MainPanel;
 
 public class Launch {
 	public static void main(String args[]) {

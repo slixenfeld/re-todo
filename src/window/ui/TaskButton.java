@@ -18,6 +18,8 @@ import javafx.scene.input.MouseButton;
 import lombok.AllArgsConstructor;
 import window.frame.MainFrame;
 import window.frame.MainFrameSingleton;
+import window.panel.MainPanel;
+import window.panel.MinimalPanel;
 
 @AllArgsConstructor
 public class TaskButton extends JButton {
