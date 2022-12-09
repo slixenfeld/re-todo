@@ -34,9 +34,6 @@ public class TaskButton extends JButton {
 	int days;
 	boolean repeats;
 
-	private final JLabel repeat_label = new JLabel();
-	private final JPanel dueColorPanel = new JPanel();
-	
 	private void setDueColor(int days) {
 
 		Color backgroundColor = new Color(255,255,255,40);
@@ -48,13 +45,14 @@ public class TaskButton extends JButton {
 			if (days < -25) days = -25;
 			backgroundColor = new Color(0 + (-days * 10),0,0, 40);		
 		}
+		JPanel dueColorPanel = new JPanel();
 		dueColorPanel.setSize(WIDTH-1,HEIGHT);
 		dueColorPanel.setBackground(backgroundColor);
 		this.add(dueColorPanel);
 	}
 	
 	public void setDefaults() {
-		
+		JLabel repeat_label = new JLabel();
 		repeat_label.setText((repeats) ? "R" : "");
         repeat_label.setLocation(5, 0);
         repeat_label.setSize(30,25);

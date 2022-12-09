@@ -89,10 +89,10 @@ public class MainPanel extends AbstractPanel {
 	
 	private void addTabButtons() {
 		int index = 0;
-		int width = ((0x171 ) / categories.size());
+		int width = ((0x170 -2) / categories.size());
 
 		for (String category : categories) {
-			addTabButton(category, 1+ (index * width), 35 , width -2 , 25);
+			addTabButton(category, 3+ (index * width), 37 , width -2 , 25);
 			index++;
 		}
 	}
@@ -101,6 +101,7 @@ public class MainPanel extends AbstractPanel {
 		TabButton tabButton = new TabButton(name);
 		tabButton.setDefaults();
 		tabButton.setBounds(x, y, w, h);
+		tabButton.addColorPanel();
 		this.add(tabButton);
 	}
 	
