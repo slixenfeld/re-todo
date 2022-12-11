@@ -4,10 +4,8 @@
     <!--ANT 1.7 is required                                        -->
     <!--define folder properties-->
     <property name="dir.buildfile" value="."/>
-    <property name="dir.workspace" value="D:/Programming/eclipse-workspace"/>
-    <property name="dir.jarfile" value="C:/Users/simon/My Jars"/>
     <target name="create_run_jar">
-        <jar destfile="${dir.jarfile}/re-todo.jar" filesetmanifest="mergewithoutmain">
+        <jar destfile="${dir.buildfile}/re-todo.jar" filesetmanifest="mergewithoutmain">
             <manifest>
                 <attribute name="Main-Class" value="launcher.Launch"/>
                 <attribute name="Class-Path" value="."/>
