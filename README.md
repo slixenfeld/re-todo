@@ -11,7 +11,11 @@ Desktop Application for managing reaccuring TODO tasks.
 ---
 
 # How To Use
-* Open re-todo.jar
+- Add new tasks with the green button
+- Minimize to todo-tasks with the collapse button
+- left click tasks to set their status as done
+- right click existing tasks to edit them
+- 
 
 # Configuration File
 * Windows: %AppData%\Roaming\retodo.conf
