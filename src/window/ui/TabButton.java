@@ -21,6 +21,11 @@ public class TabButton extends JButton {
 
 	String name;
 
+	@Override
+	public void setBounds(int x, int y, int w, int h) {
+		super.setBounds(x, y, w, h);
+	}
+
 	public void setDefaults() {
 
 		this.setLayout(null);

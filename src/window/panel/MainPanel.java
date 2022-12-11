@@ -33,6 +33,9 @@ public class MainPanel extends AbstractPanel {
 
 	public MainPanel this_obj = this;
 
+	List<TaskButton> taskButtons = new ArrayList<>();
+	List<TabButton> tabButtons = new ArrayList<>();
+
 	public MainPanel() {
 
 		MainFrame.currentWindowType = WindowType.MAIN;
@@ -40,6 +43,27 @@ public class MainPanel extends AbstractPanel {
 		Config.load();
 		this.setSize(0x171, 0x200);
 		setup_ui_components();
+	}
+
+	@Override
+	public void resize() {
+
+		super.resize();
+
+		for (TaskButton tb : taskButtons)
+			tb.resize(this.getWidth() - 9, tb.getHeight());
+
+		resizeTabButtons();
+	}
+
+	private void resizeTabButtons() {
+		int index = 0;
+		int width = ((this.getWidth() - 2) / categories.size());
+
+		for (TabButton tb : tabButtons) {
+			tb.setBounds(3 + (index * width), 37, width - 2, 25);
+			index++;
+		}
 	}
 
 	@Override
@@ -76,6 +100,7 @@ public class MainPanel extends AbstractPanel {
 		loadCategories();
 		addTabButtons();
 		addTaskButtons();
+
 	}
 
 	private void loadCategories() {
@@ -106,6 +131,7 @@ public class MainPanel extends AbstractPanel {
 		tabButton.setBounds(x, y, w, h);
 		tabButton.addColorPanel();
 		this.add(tabButton);
+		tabButtons.add(tabButton);
 	}
 
 	public void addTaskButtons() {
@@ -138,6 +164,7 @@ public class MainPanel extends AbstractPanel {
 				task_button.setDefaults();
 				task_button.setLocation(x, y);
 				this.add(task_button);
+				taskButtons.add(task_button);
 
 				row_y += 30;
 				MainFrameSingleton.getInstance().setSize(this.getWidth(), 65 + row_y);

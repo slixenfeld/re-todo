@@ -30,6 +30,14 @@ public class TaskButton extends JButton {
 	int days;
 	boolean repeats;
 
+	final JPanel dueColorPanel = new JPanel();
+
+	@Override
+	public void resize(int w, int h) {
+		super.resize(w, h);
+		dueColorPanel.setSize(this.getWidth() - 1, this.getHeight());
+	}
+
 	private void setDueColor(int days) {
 
 		Color backgroundColor = new Color(255, 255, 255, 40);
@@ -42,8 +50,7 @@ public class TaskButton extends JButton {
 				days = -25;
 			backgroundColor = new Color(0 + (-days * 10), 0, 0, 40);
 		}
-		JPanel dueColorPanel = new JPanel();
-		dueColorPanel.setSize(WIDTH - 1, HEIGHT);
+		dueColorPanel.setSize(this.getWidth() - 1, this.getHeight());
 		dueColorPanel.setBackground(backgroundColor);
 		this.add(dueColorPanel);
 	}
@@ -58,6 +65,7 @@ public class TaskButton extends JButton {
 
 		this.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+
 				if (e.getButton() == MouseEvent.NOBUTTON) {
 
 				} else if (e.getButton() == MouseEvent.BUTTON1) {

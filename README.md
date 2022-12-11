@@ -7,7 +7,6 @@ Desktop Application for managing reaccuring TODO tasks.
 ![UI](new_task.png "ui") </br></br>
 ![UI](category_test1.png "ui") </br></br>
 
-
 ---
 
 # How To Use
@@ -15,7 +14,11 @@ Desktop Application for managing reaccuring TODO tasks.
 - Minimize to todo-tasks with the collapse button
 - left click tasks to set their status as done
 - right click existing tasks to edit them
-- 
+
+# Features
+- Set tasks as repeating after <x> days
+- Categorize your tasks
+- Minimize to undone tasks
 
 # Configuration File
 * Windows: %AppData%\Roaming\retodo.conf
