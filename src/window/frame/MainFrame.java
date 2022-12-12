@@ -1,6 +1,7 @@
 package window.frame;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -46,6 +47,8 @@ public class MainFrame extends JFrame {
 		this.setVisible(true);
 	}
 
+	ComponentResizer cr;
+
 	private void setup_frame_settings() {
 		this.setTitle("re-todo");
 		this.setBackground(Color.black);
@@ -54,6 +57,10 @@ public class MainFrame extends JFrame {
 		this.setUndecorated(true);
 		this.setSize(0x171, 0x200);
 		this.setResizable(true);
+
+		cr = new ComponentResizer();
+		cr.setSnapSize(new Dimension(15, 15));
+		cr.registerComponent(this);
 	}
 
 	private void add_listeners() {
@@ -66,9 +73,11 @@ public class MainFrame extends JFrame {
 
 		this.addMouseMotionListener(new MouseMotionAdapter() {
 			public void mouseDragged(MouseEvent e) {
-				Point p = MainFrameSingleton.getInstance().getLocation();
-				MainFrameSingleton.getInstance().setLocation(p.x + e.getX() - point.x,
-						p.y + e.getY() - point.y);
+				if (!cr.resizing) {
+					Point p = MainFrameSingleton.getInstance().getLocation();
+					MainFrameSingleton.getInstance().setLocation(p.x + e.getX() - point.x,
+							p.y + e.getY() - point.y);
+				}
 			}
 		});
 
