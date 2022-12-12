@@ -113,7 +113,7 @@ public class MainFrame extends JFrame {
 		else
 			repeats = Config.properties.getProperty(name + "_repeating").equals("true");
 
-		MainFrameSingleton.getInstance().loadPanel(new NewTaskPanel(name, category,
+		MainFrameSingleton.getInstance().loadPanel(new NewTaskPanel(false, name, category,
 				Config.properties.getProperty(name + "_days"), repeats));
 	}
 }

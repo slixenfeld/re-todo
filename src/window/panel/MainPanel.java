@@ -79,7 +79,8 @@ public class MainPanel extends AbstractPanel {
 		addButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainFrameSingleton.getInstance().loadPanel(new NewTaskPanel("", "", "", false));
+				MainFrameSingleton.getInstance()
+						.loadPanel(new NewTaskPanel(true, "", "", "", false));
 			}
 		});
 		this.add(addButton);

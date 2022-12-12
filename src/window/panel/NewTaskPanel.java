@@ -18,13 +18,16 @@ import window.frame.MainFrameSingleton;
 public class NewTaskPanel extends AbstractPanel {
 	private static final long serialVersionUID = 1L;
 
+	boolean nameChangeable;
 	boolean repeating = false;
 
 	String preset_name = "";
 	String preset_days = "";
 	String category;
 
-	public NewTaskPanel(String task_name, String category, String days, boolean repeats) {
+	public NewTaskPanel(boolean nameChangeable, String task_name, String category, String days,
+			boolean repeats) {
+		this.nameChangeable = nameChangeable;
 		this.preset_name = task_name;
 		this.category = category;
 		this.preset_days = days;
@@ -38,12 +41,13 @@ public class NewTaskPanel extends AbstractPanel {
 	public void setup_ui_components() {
 		super.setup_ui_components();
 
-		JLabel name_label = new JLabel("todo name");
+		JLabel name_label = new JLabel((nameChangeable) ? "todo name" : preset_name);
 		name_label.setSize(150, 25);
 		name_label.setLocation(25, 0 + 0);
 		this.add(name_label);
 
 		JTextField task_name_field = new JTextField();
+		task_name_field.setEnabled(nameChangeable);
 		task_name_field.setSize(300, 25);
 		task_name_field.setLocation(25, 25 + 0);
 		if (!preset_name.isEmpty()) {
