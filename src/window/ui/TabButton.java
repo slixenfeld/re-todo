@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import lombok.AllArgsConstructor;
+import util.Util;
 import window.frame.MainFrame;
 import window.frame.MainFrameSingleton;
 import window.panel.MainPanel;
@@ -35,8 +36,10 @@ public class TabButton extends JButton {
 		this.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
 				MainFrame.currentTab = name;
 				MainFrameSingleton.getInstance().loadPanel(new MainPanel());
+				Util.sleep(100);
 			}
 		});
 	}
