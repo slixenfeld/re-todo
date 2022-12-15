@@ -3,6 +3,7 @@ package window.panel;
 import java.time.LocalDate;
 
 import config.Config;
+import util.Util;
 import window.frame.MainFrame;
 import window.frame.MainFrameSingleton;
 import window.ui.TaskButton;
@@ -45,26 +46,32 @@ public class MinimalPanel extends AbstractPanel {
 
 		if (!short_key.isEmpty()) {
 
-			if (getExpiredTime(key, short_key) <= 0) {
+			if (Util.getConf(short_key + "_category").equals("") || Util
+					.getConf("category_show_in_minimal_" + Util.getConf(short_key + "_category"))
+					.equals("true")) {
 
-				boolean repeats;
+				if (getExpiredTime(key, short_key) <= 0) {
 
-				if (Config.properties.getProperty(short_key + "_repeating") == null)
-					repeats = true;
-				else
-					repeats = Config.properties.getProperty(short_key + "_repeating")
-							.equals("true");
+					boolean repeats;
 
-				TaskButton task_button = new TaskButton(WindowType.MINIMAL, short_key,
-						getExpiredTime(key, short_key), repeats);
-				task_button.setDefaults();
-				task_button.setLocation(x, y);
-				this.add(task_button);
+					if (Config.properties.getProperty(short_key + "_repeating") == null)
+						repeats = true;
+					else
+						repeats = Config.properties.getProperty(short_key + "_repeating")
+								.equals("true");
 
-				row_y += 30;
-				MainFrameSingleton.getInstance().setSize(this.getWidth(), 35 + row_y);
+					TaskButton task_button = new TaskButton(WindowType.MINIMAL, short_key,
+							getExpiredTime(key, short_key), repeats);
+					task_button.setDefaults();
+					task_button.setLocation(x, y);
+					this.add(task_button);
+
+					row_y += 30;
+					MainFrameSingleton.getInstance().setSize(this.getWidth(), 35 + row_y);
+				}
 			}
 		}
+
 	}
 
 	/**
