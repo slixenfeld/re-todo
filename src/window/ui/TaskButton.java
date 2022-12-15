@@ -73,7 +73,7 @@ public class TaskButton extends JButton {
 				} else if (e.getButton() == MouseEvent.BUTTON1) {
 
 					boolean repeats;
-					if (confExists(key + "_repeating"))
+					if (!confExists(key + "_repeating"))
 						repeats = true;
 					else
 						repeats = Config.properties.getProperty(key + "_repeating").equals("true");
