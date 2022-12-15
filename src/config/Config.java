@@ -48,10 +48,12 @@ public class Config {
 	public static void save() {
 		try {
 			FileOutputStream stream = new FileOutputStream(getConfigPath());
+			if (properties.size() == 0)
+				throw new Exception("no elements");
 			properties.store(stream, null);
 			stream.flush();
 			stream.close();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

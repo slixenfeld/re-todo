@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 import window.frame.MainFrameSingleton;
 
-public class AbstractPanel extends JPanel {
+public class AbstractPanel extends JPanel implements IAbstractPanel {
 	private static final long serialVersionUID = 1L;
 
 	JButton new_button;

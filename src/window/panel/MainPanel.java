@@ -12,6 +12,7 @@ import javax.swing.JButton;
 
 import config.Config;
 import lombok.Getter;
+import util.Util;
 import window.frame.MainFrame;
 import window.frame.MainFrameSingleton;
 import window.ui.TabButton;
@@ -148,7 +149,7 @@ public class MainPanel extends AbstractPanel {
 		if (!short_key.isEmpty()) {
 
 			String category = "";
-			if (Config.properties.getProperty(short_key + "_category") != null)
+			if (Util.confExists(short_key + "_category"))
 				category = Config.properties.getProperty(short_key + "_category");
 
 			if (category.equals(MainFrame.currentTab)) {
