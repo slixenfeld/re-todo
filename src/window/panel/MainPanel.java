@@ -12,7 +12,6 @@ import javax.swing.JButton;
 
 import config.Config;
 import lombok.Getter;
-import util.Util;
 import window.frame.MainFrame;
 import window.frame.MainFrameSingleton;
 import window.ui.TabButton;
@@ -43,12 +42,11 @@ public class MainPanel extends AbstractPanel {
 
 		Config.load();
 		this.setSize(0x171, 0x200);
-		setup_ui_components();
+		setupUIComponents();
 	}
 
 	@Override
 	public void resize() {
-
 		super.resize();
 
 		for (TaskButton tb : taskButtons)
@@ -68,8 +66,8 @@ public class MainPanel extends AbstractPanel {
 	}
 
 	@Override
-	public void setup_ui_components() {
-		super.setup_ui_components();
+	public void setupUIComponents() {
+		super.setupUIComponents();
 
 		JButton addButton = new JButton(
 				new ImageIcon(this.getClass().getResource(RESOURCES_ICONS_ADD_PNG)));
@@ -102,11 +100,9 @@ public class MainPanel extends AbstractPanel {
 		loadCategories();
 		addTabButtons();
 		addTaskButtons();
-
 	}
 
 	private void loadCategories() {
-
 		categories = new ArrayList<>();
 		categories.add("");
 
@@ -142,27 +138,28 @@ public class MainPanel extends AbstractPanel {
 		}
 	}
 
-	private void addTaskButton(String key, String value, int x, int y) {
+	private void addTaskButton(String property, String value, int x, int y) {
 
-		String short_key = (key.contains("_days")) ? key.substring(0, key.length() - 5) : "";
+		String key = (property.contains("_days")) ? property.substring(0, property.length() - 5)
+				: "";
 
-		if (!short_key.isEmpty()) {
+		if (!key.isEmpty()) {
 
 			String category = "";
-			if (Util.confExists(short_key + "_category"))
-				category = Config.properties.getProperty(short_key + "_category");
+			if (Config.exists(key + "_category"))
+				category = Config.properties.getProperty(key + "_category");
 
 			if (category.equals(MainFrame.currentTab)) {
+
 				boolean repeats;
 
-				if (Config.properties.getProperty(short_key + "_repeating") == null)
+				if (Config.properties.getProperty(key + "_repeating") == null)
 					repeats = true;
 				else
-					repeats = Config.properties.getProperty(short_key + "_repeating")
-							.equals("true");
+					repeats = Config.properties.getProperty(key + "_repeating").equals("true");
 
-				TaskButton task_button = new TaskButton(WindowType.MAIN, short_key,
-						getExpiredTime(key, short_key), repeats);
+				TaskButton task_button = new TaskButton(WindowType.MAIN, key,
+						getExpiredTime(property, key), repeats);
 				task_button.setDefaults();
 				task_button.setLocation(x, y);
 				this.add(task_button);

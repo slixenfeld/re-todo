@@ -1,9 +1,9 @@
 package window.panel;
 
 import java.time.LocalDate;
+import java.util.Map.Entry;
 
 import config.Config;
-import util.Util;
 import window.frame.MainFrame;
 import window.frame.MainFrameSingleton;
 import window.ui.TaskButton;
@@ -24,44 +24,43 @@ public class MinimalPanel extends AbstractPanel {
 
 		Config.load();
 		this.setSize(0x171, 0x200);
-		setup_ui_components();
+		setupUIComponents();
 	}
 
 	@Override
-	public void setup_ui_components() {
-		super.setup_ui_components();
+	public void setupUIComponents() {
+		super.setupUIComponents();
 
 		addTaskButtons();
 	}
 
 	public void addTaskButtons() {
-		Config.properties.entrySet().stream()
-				.forEach(entry -> addTaskButton((String) entry.getKey(), (String) entry.getValue(),
-						row_x, 35 + row_y));
+		for (Entry<Object, Object> entry : Config.properties.entrySet())
+			addTaskButton((String) entry.getKey(), (String) entry.getValue(), row_x, 35 + row_y);
 	}
 
-	private void addTaskButton(String key, String value, int x, int y) {
+	private void addTaskButton(String property, String value, int x, int y) {
 
-		String short_key = (key.contains("_days")) ? key.substring(0, key.length() - 5) : "";
+		String key = (property.contains("_days")) ? property.substring(0, property.length() - 5)
+				: "";
 
-		if (!short_key.isEmpty()) {
+		if (!key.isEmpty()) {
 
-			if (Util.getConf(short_key + "_category").equals("") || Util
-					.getConf("category_show_in_minimal_" + Util.getConf(short_key + "_category"))
-					.equals("true")) {
+			if (Config.get(key + "_category").equals("")
+					|| Config.get("category_show_in_minimal_" + Config.get(key + "_category"))
+							.equals("true")) {
 
-				if (getExpiredTime(key, short_key) <= 0) {
+				if (getExpiredTime(property, key) <= 0) {
 
 					boolean repeats;
 
-					if (Config.properties.getProperty(short_key + "_repeating") == null)
+					if (!Config.exists(key + "_repeating"))
 						repeats = true;
 					else
-						repeats = Config.properties.getProperty(short_key + "_repeating")
-								.equals("true");
+						repeats = Config.properties.getProperty(key + "_repeating").equals("true");
 
-					TaskButton task_button = new TaskButton(WindowType.MINIMAL, short_key,
-							getExpiredTime(key, short_key), repeats);
+					TaskButton task_button = new TaskButton(WindowType.MINIMAL, key,
+							getExpiredTime(property, key), repeats);
 					task_button.setDefaults();
 					task_button.setLocation(x, y);
 					this.add(task_button);
@@ -71,7 +70,6 @@ public class MinimalPanel extends AbstractPanel {
 				}
 			}
 		}
-
 	}
 
 	/**
@@ -84,25 +82,25 @@ public class MinimalPanel extends AbstractPanel {
 	 */
 	private int getExpiredTime(String key, String name) {
 		String date_string = (String) Config.properties.get(name + "_last_date");
-		LocalDate date_after_days = LocalDate.parse(date_string)
+		LocalDate dateAfterDays = LocalDate.parse(date_string)
 				.plusDays(Integer.parseInt((String) Config.properties.get(key)));
 
-		if (date_after_days.getYear() == LocalDate.now().getYear()) {
-			return date_after_days.getDayOfYear() - LocalDate.now().getDayOfYear();
-		} else if (date_after_days.getYear() == LocalDate.now().getYear() + 1) {
-			return (date_after_days.getDayOfYear() + (365 - LocalDate.now().getDayOfYear()));
-		} else if (date_after_days.getYear() == LocalDate.now().getYear() + 2) {
+		if (dateAfterDays.getYear() == LocalDate.now().getYear()) {
+			return dateAfterDays.getDayOfYear() - LocalDate.now().getDayOfYear();
+		} else if (dateAfterDays.getYear() == LocalDate.now().getYear() + 1) {
+			return (dateAfterDays.getDayOfYear() + (365 - LocalDate.now().getDayOfYear()));
+		} else if (dateAfterDays.getYear() == LocalDate.now().getYear() + 2) {
 			return (365 * 1)
-					+ (date_after_days.getDayOfYear() + (365 - LocalDate.now().getDayOfYear()));
-		} else if (date_after_days.getYear() == LocalDate.now().getYear() + 3) {
+					+ (dateAfterDays.getDayOfYear() + (365 - LocalDate.now().getDayOfYear()));
+		} else if (dateAfterDays.getYear() == LocalDate.now().getYear() + 3) {
 			return (365 * 2)
-					+ (date_after_days.getDayOfYear() + (365 - LocalDate.now().getDayOfYear()));
-		} else if (date_after_days.getYear() == LocalDate.now().getYear() + 4) {
+					+ (dateAfterDays.getDayOfYear() + (365 - LocalDate.now().getDayOfYear()));
+		} else if (dateAfterDays.getYear() == LocalDate.now().getYear() + 4) {
 			return (365 * 3)
-					+ (date_after_days.getDayOfYear() + (365 - LocalDate.now().getDayOfYear()));
-		} else if (date_after_days.getYear() == LocalDate.now().getYear() + 5) {
+					+ (dateAfterDays.getDayOfYear() + (365 - LocalDate.now().getDayOfYear()));
+		} else if (dateAfterDays.getYear() == LocalDate.now().getYear() + 5) {
 			return (365 * 4)
-					+ (date_after_days.getDayOfYear() + (365 - LocalDate.now().getDayOfYear()));
+					+ (dateAfterDays.getDayOfYear() + (365 - LocalDate.now().getDayOfYear()));
 		}
 		return -999999999;
 	}

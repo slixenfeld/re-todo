@@ -1,4 +1,4 @@
-package window.frame;
+package util;
 
 import java.awt.Component;
 import java.awt.Cursor;

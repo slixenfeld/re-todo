@@ -16,6 +16,10 @@ import window.panel.MinimalPanel;
 @NoArgsConstructor
 public class Config {
 
+	private static final String USER_HOME = "/home/" + System.getProperty("user.name");
+	private static final String RETODO_CONF_FILE = System.getenv("APPDATA") + "/retodo.conf";
+	private static final String LOCAL_SHARE_APPLICATIONS_RETODO_CONF = "/.local/share/applications/retodo.conf";
+
 	public static Properties properties = new Properties();
 
 	private static Timer refresh;
@@ -68,14 +72,23 @@ public class Config {
 		}
 	}
 
+	public static boolean exists(String propertyName) {
+		return (properties.getProperty(propertyName) != null);
+	}
+
+	public static String get(String propertyName) {
+		if (exists(propertyName))
+			return Config.properties.getProperty(propertyName);
+		return "";
+	}
+
 	private static String getConfigPath() {
 		String os = (System.getProperty("os.name").toLowerCase());
 		if (os.contains("win")) {
-			return System.getenv("APPDATA") + "/retodo.conf";
+			return RETODO_CONF_FILE;
 		} else if (os.contains("nux") || os.contains("nix") || os.contains("aix")
 				|| os.contains("mac")) {
-			return "/home/" + System.getProperty("user.name")
-					+ "/.local/share/applications/retodo.conf";
+			return USER_HOME + LOCAL_SHARE_APPLICATIONS_RETODO_CONF;
 		} else {
 			return "/retodo.conf";
 		}
