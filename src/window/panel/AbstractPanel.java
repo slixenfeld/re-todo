@@ -34,7 +34,7 @@ public class AbstractPanel extends JPanel implements IAbstractPanel {
 		g.drawRect(0, 0, getWidth(), getHeight());
 	}
 
-	public void setup_ui_components() {
+	public void setupUIComponents() {
 		this.setLayout(null);
 		MainFrameSingleton.getInstance().setSize(this.getSize());
 

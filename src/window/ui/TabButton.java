@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 
 import config.Config;
 import lombok.AllArgsConstructor;
-import util.Util;
 import window.frame.MainFrame;
 import window.frame.MainFrameSingleton;
 import window.panel.CategoryPanel;
@@ -49,7 +48,7 @@ public class TabButton extends JButton {
 				} else if (e.getButton() == MouseEvent.BUTTON3) {
 
 					boolean showInMinimal = true;
-					if (Util.confExists("category_show_in_minimal_" + name))
+					if (Config.exists("category_show_in_minimal_" + name))
 						showInMinimal = Config.properties
 								.getProperty("category_show_in_minimal_" + name).equals("true");
 

@@ -1,7 +1,5 @@
 package util;
 
-import config.Config;
-
 public class Util {
 	public static void sleep(int ms) {
 		try {
@@ -11,13 +9,4 @@ public class Util {
 		}
 	}
 
-	public static boolean confExists(String propertyName) {
-		return (Config.properties.getProperty(propertyName) != null);
-	}
-
-	public static String getConf(String propertyName) {
-		if (confExists(propertyName))
-			return Config.properties.getProperty(propertyName);
-		return "";
-	}
 }

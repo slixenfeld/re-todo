@@ -1,7 +1,5 @@
 package window.ui;
 
-import static util.Util.confExists;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -73,7 +71,7 @@ public class TaskButton extends JButton {
 				} else if (e.getButton() == MouseEvent.BUTTON1) {
 
 					boolean repeats;
-					if (!confExists(key + "_repeating"))
+					if (!Config.exists(key + "_repeating"))
 						repeats = true;
 					else
 						repeats = Config.properties.getProperty(key + "_repeating").equals("true");

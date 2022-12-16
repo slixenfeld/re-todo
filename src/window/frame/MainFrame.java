@@ -12,6 +12,7 @@ import java.awt.event.MouseMotionAdapter;
 import javax.swing.JFrame;
 
 import config.Config;
+import util.ComponentResizer;
 import window.panel.AbstractPanel;
 import window.panel.NewTaskPanel;
 import window.ui.WindowType;
@@ -43,7 +44,7 @@ public class MainFrame extends JFrame {
 
 	private void setup_frame() {
 		setup_frame_settings();
-		add_listeners();
+		addListeners();
 		this.setVisible(true);
 	}
 
@@ -63,7 +64,7 @@ public class MainFrame extends JFrame {
 		cr.registerComponent(this);
 	}
 
-	private void add_listeners() {
+	private void addListeners() {
 		this.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				point.x = e.getX();
@@ -90,20 +91,14 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void componentMoved(ComponentEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
 			public void componentShown(ComponentEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
 			public void componentHidden(ComponentEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 
 		});

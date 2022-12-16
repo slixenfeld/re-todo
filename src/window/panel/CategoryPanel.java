@@ -25,13 +25,13 @@ public class CategoryPanel extends AbstractPanel {
 		this.showInMinimal = showInMinimal;
 		this.categoryName = categoryName;
 		this.setSize(0x171, 0x0A0);
-		setup_ui_components();
+		setupUIComponents();
 	}
 
 	@Override
-	public void setup_ui_components() {
+	public void setupUIComponents() {
 
-		super.setup_ui_components();
+		super.setupUIComponents();
 
 		categoryLabel.setText(categoryName);
 		categoryLabel.setBounds(5, 5, 100, 25);
