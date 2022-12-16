@@ -37,7 +37,6 @@ public class MainPanel extends AbstractPanel {
 	List<TabButton> tabButtons = new ArrayList<>();
 
 	public MainPanel() {
-
 		MainFrame.currentWindowType = WindowType.MAIN;
 
 		Config.load();
@@ -100,6 +99,7 @@ public class MainPanel extends AbstractPanel {
 		loadCategories();
 		addTabButtons();
 		addTaskButtons();
+
 	}
 
 	private void loadCategories() {

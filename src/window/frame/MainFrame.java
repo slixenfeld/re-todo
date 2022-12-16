@@ -40,6 +40,7 @@ public class MainFrame extends JFrame {
 		remove(this.panel);
 		this.panel = panel;
 		add(this.panel);
+		repaint();
 	}
 
 	private void setup_frame() {
