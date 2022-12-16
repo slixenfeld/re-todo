@@ -48,9 +48,9 @@ public class TaskButton extends JButton {
 				days = 15;
 			backgroundColor = new Color(10, 100 + (days * 10), 10, 40);
 		} else if (days < 0) {
-			if (days < -25)
-				days = -25;
-			backgroundColor = new Color(0 + (-days * 10), 0, 0, 40);
+			if (days < -20)
+				days = -20;
+			backgroundColor = new Color(50 + (-days * 10), 0, 0, 40);
 		}
 		dueColorPanel.setSize(this.getWidth() - 1, this.getHeight());
 		dueColorPanel.setBackground(backgroundColor);

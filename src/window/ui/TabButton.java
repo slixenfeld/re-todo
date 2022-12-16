@@ -45,7 +45,6 @@ public class TabButton extends JButton {
 
 					MainFrame.currentTab = name;
 					MainFrameSingleton.getInstance().loadPanel(new MainPanel());
-					Util.sleep(100);
 
 				} else if (e.getButton() == MouseEvent.BUTTON3) {
 
@@ -56,7 +55,6 @@ public class TabButton extends JButton {
 
 					MainFrameSingleton.getInstance()
 							.loadPanel(new CategoryPanel(showInMinimal, name));
-					Util.sleep(100);
 				}
 			}
 		});
