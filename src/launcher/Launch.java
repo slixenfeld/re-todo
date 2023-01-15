@@ -28,8 +28,6 @@ public class Launch {
 				} else if (args[0].equalsIgnoreCase(MARS)) {
 					UIManager.setLookAndFeel(new MaterialLookAndFeel(new JMarsDarkTheme()));
 				}
-			} else {
-				UIManager.setLookAndFeel(new MaterialLookAndFeel(new MaterialLiteTheme()));
 			}
 		} catch (Exception e) {
 			System.out.println("setting look and feel failed: " + e.getMessage());

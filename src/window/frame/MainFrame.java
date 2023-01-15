@@ -27,7 +27,7 @@ public class MainFrame extends JFrame {
 	public static String currentTab = "";
 	public static WindowType currentWindowType = WindowType.MAIN;
 	public static int WIDTH = 0x171;
-	public static int HEIGHT = 0x200;
+	public static int HEIGHT = 0x064;
 
 	public MainFrame() {
 		setup_frame();

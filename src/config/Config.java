@@ -13,6 +13,7 @@ import window.frame.MainFrame;
 import window.frame.MainFrameSingleton;
 import window.panel.MainPanel;
 import window.panel.MinimalPanel;
+import window.ui.WindowType;
 
 @NoArgsConstructor
 public class Config {
@@ -32,6 +33,9 @@ public class Config {
 		if (!fileExists) {
 			properties.put("initialized", "true");
 			save();
+			MainFrameSingleton.getInstance().currentWindowType = WindowType.MAIN;
+		} else {
+			MainFrameSingleton.getInstance().currentWindowType = WindowType.MINIMAL;
 		}
 
 		try {
