@@ -34,6 +34,3 @@ java -jar re-todo.jar `theme`
 
 # License
 GPLv3
-
-# Author
-*slxfld 2022*
